@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今天吃什么</title>
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB0PSIxNzUzMTA0MTU1MzQzIiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9Ijg5MTciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4Ij48cGF0aCBkPSJNNjU5LjUyIDgyNi4yNHY1MC41NmEyNC43NjggMjQuNzY4IDAgMCAxLTI0Ljc2OCAyNC44MzJINDkzLjkyYTI0Ljc2OCAyNC43NjggMCAwIDEtMjQuNzY4LTI0LjgzMnYtNTAuNTZoMjkwLjM2OHogbTE3OS44NC0zNjcuMjMyYzYuMzM2IDAgMTEuNTIgNS4xODQgMTEuNTIgMTEuNTJ2Mi42ODhhMTEuNTg0IDExLjU4NCAwIDAgMS0xMS41MiAxMS41MmgtMy44NGwwLjA2NCAxNDIuMjA4YTE3OS41MiAxNzkuNTIgMCAwIDEtMTc5LjUyIDE3OS41MkgzNzIuNjcyYTE3OS41MiAxNzkuNTIgMCAwIDEtMTc5LjUyLTE3OS41MmwtMC4wNjQtMTQyLjE0NGgtMy43MTJhMTEuNTIgMTEuNTIgMCAwIDEtMTEuNS0xMS41ODR2LTIuNjI0YzAtNi40IDUuMTItMTEuNTg0IDExLjUtMTEuNTg0aDY0OS45MnogbTQxLjQwOC0zMDcuNzEyYTI4LjM1MiAyOC4zNTIgMCAwIDEtMjEuMTIgMzMuNmwtMjYyLjIwOCA1MC44OHY2Ny43MTJsMjYzLjA0LTQxLjIxNmEyOC4zNTIgMjguMzUyIDAgMSAxIDcuNjggNTYuMTkyTDQwNy4wMjQgNDM1LjJWNDM1LjJoLTQ5LjUzNlYzNTUuMTM2bC01Ny42IDYuNTkyIDAuMDY0IDczLjQ3MmgtNDkuNTM2VjM2Ny4zNmwtNTcuNiA2LjY1NiAwLjA2NCA2MS4xODRoLTQ5LjUzNmwtMC4wNjQtNTUuNDg4LTE4OS4xODQgMjEuNjk2YTEzLjMxMiAxMy4zMTIgMCAwIDEtMy41ODQtMjYuMzY4bDE5Mi43NjgtMzAuMjA4di01Ny44NTZsLTE4OS4wNTYgMzYuNzM2YTEzLjMxMiAxMy4zMTIgMCAxIDEtNS42MzItMjUuOTg0bDcwOC42NzItMTY4LjMyYTI4LjM1MiAyOC4zNTIgMCAwIDEgMzMuMDg4IDIxLjg4OHpNNDQwLjgzMiAyNjYuMjRsLTU3LjYgMTEuMnY1OS42NDhsNTcuNi04Ljk2di02MS44ODh6IG0xMDcuMDcyLTIwLjczNmwtNTcuNiAxMS4xMzZ2NjMuNjhsNTcuNi05LjAyNFYyNDUuNHoiIGZpbGw9IiM0NDgzNkMiIHAtaWQ9Ijg5MTgiPjwvcGF0aD48L3N2Zz4=">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .theme-modern {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        .theme-classic {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #333;
+        }
+        .theme-dark {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+        }
+        .theme-elegant {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #5d4037;
+        }
+        .theme-nature {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            color: #2e7d32;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+        .logo {
+            margin: 0 auto;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            padding-left: 78px;
+        }
+        .theme-selector {
+            position: relative;
+        }
+        select {
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+        .link-dropdown {
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            font-size: 11px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        .dropdown {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: inherit;
+            cursor: pointer;
+            font-size: 14px;
+            backdrop-filter: blur(5px);
+        }
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 4px 16px rgba(31, 38, 135, 0.2);
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .filter-label {
+            font-weight: bold;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .search-input {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: inherit;
+            font-size: 14px;
+            min-width: 200px;
+            backdrop-filter: blur(5px);
+        }
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .checkbox-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .checkbox-item input {
+            margin: 0;
+        }
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .dish-card {
+            display: flex;
+            width: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .dish-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+        }
+        .dish-card.no-image {
+            flex-direction: column;
+            padding: 15px;
+        }
+        .dish-image {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .dish-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .price-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .dish-info {
+            flex: 1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .dish-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .dish-name > a {
+            color: #111;
+            text-decoration: initial;
+            width: 220px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .tags-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 8px;
+        }
+        .tag {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .tag-time { background: #9b59b6; }
+        .tag-cuisine { background: #e74c3c; }
+        .tag-seasoning { background: #f39c12; }
+        .tag-taste { background: #27ae60; }
+        @media (max-width: 768px) {
+            .dishes-grid {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .dish-card {
+                width: 100%;
+                max-width: 400px;
+            }
+            .logo {
+                padding-left: 0;
+            }
+        }
+        .category-title {
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-align: center;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 3rem;
+            transition: transform 0.3s ease;
+        }
+        .category-title:hover {
+            transform: scale(1.2);
+        }
+        .subcategory-title {
+            font-size: 1.8rem;
+            margin: 0 0 20px 0;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .price-tag {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        #choose-random-food {
+            border-radius: 100%;
+            height: 70px;
+            width: 70px;
+            margin-left: 20px;
+            background-color: #aa96da;
+            cursor: pointer;
+            border: none;
+        }
+        #choose-random-food:active {
+            transform: scale(0.90);
+        }
+        #random-food {
+            display: flex;
+            justify-content: center;
+        }
+        .theme-dark .dropdown,
+        .theme-dark .search-input, .theme-dark .link-dropdown {
+            background: rgba(0, 0, 0, 0.3);
+            color: #ecf0f1;
+        }
+        .theme-dark .search-input::placeholder {
+            color: rgba(236, 240, 241, 0.7);
+        }
+        .float-nav {
+            position: fixed;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+        .float-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.5em;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(100, 116, 139, 0.5);
+            border-radius: 2px;
+            transition: background-color 0.2s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(71, 85, 105, 0.8);
+        }
+        ::-webkit-scrollbar-button {
+            display: none;
+        }
+        @supports (scrollbar-width: thin) {
+            body {
+                scrollbar-width: thin;
+                scrollbar-color: transparent transparent;
+                transition: scrollbar-color 0.3s ease;
+            }
+        }
+    </style>
+</head>
+<body class="theme-modern">
+<div class="container">
+    <header class="header">
+        <div class="logo">今天吃什么</div>
+        <div class="theme-selector">
+            <select class="dropdown" id="themeSelector">
+                <option value="theme-modern">现代</option>
+                <option value="theme-classic">经典</option>
+                <option value="theme-dark">暗色</option>
+                <option value="theme-elegant">优雅</option>
+                <option value="theme-nature">自然</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="filters">
+        <div class="filter-group">
+            <label class="filter-label">类别</label>
+            <select class="dropdown" id="foodTypeFilter">
+                <option value="">全部类别</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label class="filter-label">菜系</label>
+            <select class="dropdown" id="cuisineFilter">
+                <option value="">全部菜系</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label class="filter-label">去掉特色</label>
+            <div class="checkbox-group" id="seasoningFilters"></div>
+        </div>
+
+        <div class="filter-group">
+            <label class="filter-label">味道</label>
+            <div class="checkbox-group" id="tasteFilters"></div>
+        </div>
+
+        <div class="filter-group">
+            <label class="filter-label">搜索菜名</label>
+            <input type="text" class="search-input" id="searchInput" placeholder="输入菜名搜索...">
+        </div>
+        <div>
+            <button id="choose-random-food">每日一菜</button>
+        </div>
+    </div>
+    <div id="random-food"></div>
+    <main id="menuContent"></main>
+    <div class="float-nav" id="floatNav"></div>
+</div>
+
+<script>
+  const menuData = {
+    "热菜": {
+      "炒菜(荤)": [
+        { "菜名": "回锅肉", "菜系": "川菜", "特色": ["豆瓣酱"], "味道": ["微辣", "咸"], "用时": "30m", "链接": { "蒜苗回锅肉": "https://www.xiachufang.com/recipe/106588436/","青椒回锅肉": "https://www.xiachufang.com/recipe/104592125/", "莲白回锅肉": "https://www.xiachufang.com/recipe/102877532/","香干回锅肉": "https://www.xiachufang.com/recipe/1073651/","苕皮回锅肉": "https://www.xiachufang.com/recipe/100105108/","土豆片回锅肉": "https://www.xiachufang.com/recipe/100138503/","蒜薹回锅肉": "https://www.xiachufang.com/recipe/159732/","干豇豆回锅肉": "https://www.xiachufang.com/recipe/100277720/","胡萝卜回锅肉": "https://www.xiachufang.com/recipe/1093909/","老咸菜回锅肉": "https://www.xiachufang.com/recipe/103733103/","洋葱回锅肉": "https://www.xiachufang.com/recipe/1056487/", }, "图片": "https://i2.chuimg.com/25f667a286f711e6a9a10242ac110002_450w_678h.jpg" },
+        { "菜名": "青椒/蒜苔/土豆等炒肉丝", "菜系": "川菜", "特色": [], "味道": ["微辣"], "用时": "20m", "链接": { "青椒肉丝": "https://www.xiachufang.com/recipe/106022067/","蒜薹肉丝": "https://www.xiachufang.com/recipe/1070778/","土豆肉丝": "https://www.xiachufang.com/recipe/157932/","莴笋肉丝": "https://www.xiachufang.com/recipe/107200335/","芹菜肉丝": "https://www.xiachufang.com/recipe/100430631/","榨菜肉丝": "https://www.xiachufang.com/recipe/102258070/","韭黄肉丝": "https://www.xiachufang.com/recipe/104212961/","豆角肉丝": "https://www.xiachufang.com/recipe/100381184/","胡萝卜肉丝": "https://www.xiachufang.com/recipe/246080/","泡椒肉丝": "https://www.xiachufang.com/recipe/100127394/","木须肉": "https://www.xiachufang.com/recipe/267863/","木耳肉丝": "https://www.xiachufang.com/recipe/100397684/","豆干肉丝": "https://www.xiachufang.com/recipe/104456265/" }, "图片": "https://i2.chuimg.com/69c86589720a4d0f8d81a584c552404e_1080w_1303h.jpg" },
+        { "菜名": "京酱肉丝", "菜系": "京菜", "特色": ["甜面酱"], "味道": ["甜", "咸"], "用时": "20m", "链接": { "京酱肉丝": "https://www.xiachufang.com/recipe/102819296/" }, "图片": "https://i2.chuimg.com/ad68d3ee04b9417da0fe91b36321558e_828w_662h.jpg" },
+        { "菜名": "鱼香肉丝", "菜系": "川菜", "特色": ["泡椒"], "味道": ["微辣", "酸甜"], "用时": "20m", "链接": { "鱼香肉丝": "https://www.xiachufang.com/recipe/100352761/" }, "图片": "https://i2.chuimg.com/503615c4419940f7b212a4c03f214caa_1280w_733h.jpg" },
+        { "菜名": "蚂蚁上树", "菜系": "川菜", "特色": ["豆瓣酱"], "味道": ["微辣"], "用时": "15m", "链接": { "蚂蚁上树": "https://www.xiachufang.com/recipe/104542654/" }, "图片": "https://i2.chuimg.com/97372cefae2049aca56a462caddc65d4_3414w_2560h.jpg" },
+        { "菜名": "盐煎肉", "菜系": "川菜", "特色": ["豆瓣酱"], "味道": ["微辣", "咸"], "用时": "20m", "链接": { "盐煎肉": "https://www.xiachufang.com/recipe/106039939/" }, "图片": "https://i2.chuimg.com/0804efe54aec45e99d9a76cc719f9e7a_912w_684h.jpg" },
+        { "菜名": "肝腰合炒", "菜系": "川菜", "特色": ["豆瓣酱", "泡椒"], "味道": ["微辣"], "用时": "15m", "链接": { "肝腰合炒": "https://www.xiachufang.com/recipe/103298001/?recipe_type=1&page_scene=6" }, "图片": "https://i2.chuimg.com/63372077c85048baa0a6b0adea5cd729_1920w_2560h.jpg" },
+        { "菜名": "小炒肉", "菜系": "湘菜", "特色": [], "味道": ["特辣"], "用时": "20m", "链接": { "小炒肉": "https://www.xiachufang.com/recipe/105950604/" }, "图片": "https://i2.chuimg.com/d73b5914261d4624b1e15bc033e943af_3414w_2560h.jpg" },
+        { "菜名": "宫保鸡丁", "菜系": "川菜", "特色": ["豆瓣酱"], "味道": ["微辣", "酸", "甜"], "用时": "20m", "链接": { "宫保鸡丁": "https://www.xiachufang.com/recipe/102205755/" }, "图片": "https://i2.chuimg.com/b917a46af36711e6947d0242ac110002_1177w_1178h.jpg" },
+        { "菜名": "青椒/土豆等炒腊肠/腊肉", "菜系": "川菜", "特色": [], "味道": ["微辣"], "用时": "20m", "链接": { "土豆青椒炒腊肠": "https://www.xiachufang.com/recipe/107358060/","荷兰豆炒腊肠": "https://www.xiachufang.com/recipe/105886542/","蒜苗炒腊肠": "https://www.xiachufang.com/recipe/104209271/","春笋炒腊肠": "https://www.xiachufang.com/recipe/106715511/","洋葱炒腊肠": "https://www.xiachufang.com/recipe/104091417/","四季豆炒腊肠": "https://www.xiachufang.com/recipe/106070513/" ,"木耳炒腊肠": "https://www.xiachufang.com/recipe/103818613/" ,"芹菜炒腊肉": "https://www.xiachufang.com/recipe/104254199/" ,"蒜苔炒腊肠": "https://www.xiachufang.com/recipe/105763366/" ,"茶树菇炒腊肠": "https://www.xiachufang.com/recipe/107231972/","儿菜炒腊肉": "https://www.xiachufang.com/recipe/106682938/","花菜炒腊肉": "https://www.xiachufang.com/recipe/104418871/","竹笋炒腊肉": "https://www.xiachufang.com/recipe/106616350/","萝卜干炒腊肠": "https://www.xiachufang.com/recipe/103530970/","腌菜炒腊肉": "https://www.xiachufang.com/recipe/102902581/" }, "图片": "https://i2.chuimg.com/41d35fce84c84101b71966cda1e84e8a_1179w_1541h.jpg" },
+        { "菜名": "辣子鸡", "菜系": "川菜", "特色": [], "味道": ["中辣"], "用时": "30m", "链接": { "辣子鸡": "https://www.xiachufang.com/recipe/104033748/" }, "图片": "https://i2.chuimg.com/bb2208e7effc496f850e49ea3a3adcc0_810w_1080h.jpg" },
+        { "菜名": "香菇滑鸡", "菜系": "粤菜", "特色": [], "味道": ["鲜"], "用时": "30m", "链接": { "香菇滑鸡": "https://www.xiachufang.com/recipe/104116894/" }, "图片": "https://i2.chuimg.com/011a6cf1112c4c4eae0d021652cc0d6e_1080w_1440h.jpg" },
+        { "菜名": "腊肉洋芋箜饭", "菜系": "川菜", "特色": [], "味道": ["微辣"], "用时": "60m", "链接": { "腊肉洋芋箜饭": "https://www.xiachufang.com/recipe/106795745/" }, "图片": "https://i2.chuimg.com/aa1ea1902125449495eb689d72bd3224_1280w_959h.jpg" },
+        { "菜名": "黑椒牛柳", "菜系": "粤菜", "特色": [], "味道": ["微辣"], "用时": "30m", "链接": { "黑椒牛柳": "https://www.xiachufang.com/recipe/1023757/" }, "图片": "https://i2.chuimg.com/79f9cb6a88d611e6a9a10242ac110002_605w_406h.jpg" },
+        { "菜名": "麻辣香锅", "菜系": "川菜", "特色": ["豆瓣酱"], "味道": ["中辣"], "用时": "90m", "链接": { "麻辣香锅": "https://www.xiachufang.com/recipe/1052406/" }, "图片": "https://i2.chuimg.com/e3e0495e876f11e6a9a10242ac110002_600w_400h.jpg" },
+        { "菜名": "小炒黄牛肉", "菜系": "湘菜", "特色": ["香菜"], "味道": ["微辣"], "用时": "30m", "链接": { "小炒黄牛肉": "https://www.xiachufang.com/recipe/105864931/" }, "图片": "https://i2.chuimg.com/a91dbcf6814248e9a1184e2dd2f65e85_2101w_2560h.jpg" },
+        { "菜名": "小龙虾", "菜系": "湘菜", "特色": [], "味道": ["特辣"], "用时": "60m", "链接": { "香辣小龙虾": "https://www.xiachufang.com/recipe/103030046/", "蒜蓉小龙虾": "https://www.xiachufang.com/recipe/103030046/" }, "图片": "https://i2.chuimg.com/473348c95a584f2ebd42b43dda7f1432_3667w_2750h.jpg" },
+        { "菜名": "油焖大虾", "菜系": "川菜", "特色": ["香菜"], "味道": ["中辣"], "用时": "30m", "链接": { "油焖大虾": "https://www.xiachufang.com/recipe/266791/" }, "图片": "https://i2.chuimg.com/142b348c742d451ebb5a5802605592b1_960w_1280h.jpg" },
+        { "菜名": "农家一碗香", "菜系": "湘菜", "特色": [], "味道": ["特辣"], "用时": "30m", "链接": { "农家一碗香": "https://www.xiachufang.com/recipe/103470481/" }, "图片": "https://i2.chuimg.com/b6ed9606804b45d79dfd32dc5629e5b6_2799w_4096h.jpg" },
+    ],
+      "炒菜(素)": [
+        { "菜名": "清炒时蔬(叶菜类)", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "上海青": "https://www.xiachufang.com/recipe/103272235/", "菠菜": "", "芹菜": "", "花菜": "", "西蓝花": "", "茼蒿": "", "空心菜": "", "娃娃菜": "", "苋菜": "", "黄花菜": "", "豌豆苗": "", "红薯叶": "", "白菜": "", "油麦菜": "", "菜心": "", "芥兰": "", "韭黄": "" }, "图片": "https://i2.chuimg.com/833ca7b5871b4304a54d09d4e7f55b19_1920w_1080h.jpg" },
+        { "菜名": "清炒时蔬(根茎类)", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "莲藕": "https://www.xiachufang.com/recipe/157815/", "莴苣": "", "茭白": "", "竹笋": "", "秋葵": "", "胡萝卜": "", "白萝卜": "", "山药": "", "芦笋": "", "豆芽": "" }, "图片": "https://i2.chuimg.com/ad42b0a3d258402bb4a19f9a44549e9b_2448w_3264h.jpg" },
+        { "菜名": "清炒时蔬(瓜果豆类)", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "丝瓜": "https://www.xiachufang.com/recipe/117568/", "荷兰豆": "", "豌豆": "", "毛豆": "", "扁豆": "", "豇豆": "", "胡豆": "", "苦瓜": "", "南瓜": "", "西葫芦": "", "番茄": "", "黄瓜": "" }, "图片": "https://i2.chuimg.com/48cf4c26ba5d4f999fe0790dfdfa7ba9_1080w_864h.jpg" },
+        { "菜名": "清炒时蔬(菌菇类)", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "平菇": "https://www.xiachufang.com/recipe/1073943/", "香菇": "", "金针菇": "", "杏鲍菇": "", "茶树菇": "", "鸡枞菌": "", "木耳": "" }, "图片": "https://i2.chuimg.com/bb40bddd36474b648ade402fb1ba030d_1080w_1920h.jpg" },
+        { "菜名": "番茄/韭菜/木耳等炒蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "番茄炒蛋": "https://www.xiachufang.com/recipe/104493058/", "韭菜炒蛋": "", "青椒炒蛋": "", "洋葱炒蛋": "", "木耳炒蛋": "", "虾仁炒蛋": "", "苦瓜炒蛋": "", "黄瓜炒蛋": "", "香椿炒蛋": "", "葱花炒蛋": "", "菠菜炒蛋": "", "西葫芦炒蛋": "", "银鱼炒蛋": "" }, "图片": "https://i2.chuimg.com/adcb20d4547d4f598f8d3f7f14928ba3_1280w_1024h.jpg" },
+        { "菜名": "手撕包菜", "菜系": "湘菜", "特色": [], "味道": ["鲜"], "用时": "10m", "链接": { "手撕包菜": "https://www.xiachufang.com/recipe/102806792/" }, "图片": "https://i2.chuimg.com/d26abca64bb34e80af2a7b0705f933dc_1616w_1080h.jpg" },
+        { "菜名": "包菜炒粉丝", "菜系": "湘菜", "特色": [], "味道": ["鲜"], "用时": "20m", "链接": { "包菜炒粉丝": "https://www.xiachufang.com/recipe/105817045/" }, "图片": "https://i2.chuimg.com/618eb9acd3434a098c00e68f06b17f89_2560w_2560h.jpg" },
+        { "菜名": "蚝油生菜", "菜系": "粤菜", "特色": [], "味道": ["鲜"], "用时": "10m", "链接": { "蚝油生菜": "https://www.xiachufang.com/recipe/105950224/" }, "图片": "https://i2.chuimg.com/b1f6c670a9cc481fb600417b5c3165ec_782w_822h.jpg" },
+        { "菜名": "虎皮青椒", "菜系": "川菜", "特色": [], "味道": ["微辣"], "用时": "20m", "链接": { "虎皮青椒": "https://www.xiachufang.com/recipe/256030/" }, "图片": "https://i2.chuimg.com/e290575e873011e6b87c0242ac110003_500w_666h.jpg" },
+        { "菜名": "地三鲜", "菜系": "东北菜", "特色": [], "味道": ["鲜"], "用时": "20m", "链接": { "地三鲜": "https://www.xiachufang.com/recipe/103917808/" }, "图片": "https://i2.chuimg.com/3000f6a757db47d9bb50191a6ebcb649_1280w_959h.jpg" },
+        { "菜名": "干煸四季豆", "菜系": "川菜", "特色": [], "味道": ["微辣"], "用时": "20m", "链接": { "干煸四季豆": "https://www.xiachufang.com/recipe/26675/" }, "图片": "https://i2.chuimg.com/77f73c0baf7e477ba064d0128dfdfa2b_1920w_2560h.jpg" },
+        { "菜名": "土豆丝", "菜系": "家常菜", "特色": [], "味道": ["酸", "微辣"], "用时": "20m", "链接": { "酸辣土豆丝": "https://www.xiachufang.com/recipe/106785854/", "醋溜土豆丝": "https://www.xiachufang.com/recipe/107340568/", "炝炒土豆丝": "https://www.xiachufang.com/recipe/103342795/?recipe_type=1&page_scene=6" }, "图片": "https://i2.chuimg.com/d1fff8a192e34902b05cd7b21f656e22_1170w_1529h.jpg" },
+        { "菜名": "木须菜", "菜系": "鲁菜", "特色": [], "味道": [], "用时": "30m", "链接": { "木须菜": "https://www.xiachufang.com/recipe/107350682/" }, "图片": "https://i2.chuimg.com/58ccf9b8099849c3a218b4b35029d02f_1921w_2560h.jpg" },
+        { "菜名": "素炒三丝", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "素炒三丝": "https://www.xiachufang.com/recipe/260410/" }, "图片": "https://i2.chuimg.com/37b919d0873311e6b87c0242ac110003_490w_368h.jpg" },
+        { "菜名": "荷塘小炒", "菜系": "粤菜", "特色": [], "味道": [], "用时": "20m", "链接": { "荷塘小炒": "https://www.xiachufang.com/recipe/106176862/" }, "图片": "https://i2.chuimg.com/565cea79124c40d28758a89538d1978f_3798w_2846h.jpg" },
+        { "菜名": "红烧茄子", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "红烧茄子": "https://www.xiachufang.com/recipe/104406253/", "鱼香茄子": "https://www.xiachufang.com/recipe/104416071/", "豆角茄子": "https://www.xiachufang.com/recipe/267078/" }, "图片": "https://i2.chuimg.com/12612b0288ad11e6b87c0242ac110003_1239w_1209h.jpg" },
+        { "菜名": "拔丝地瓜/香蕉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "拔丝地瓜": "https://www.xiachufang.com/recipe/104340570/", "拔丝香蕉": "https://www.xiachufang.com/recipe/104675401/", "拔丝土豆": "https://www.xiachufang.com/recipe/100053970/", "拔丝苹果": "https://www.xiachufang.com/recipe/102799073/", "拔丝鸡蛋": "https://www.xiachufang.com/recipe/107328848/", }, "图片": "https://i2.chuimg.com/47f0653ab17f4714bd2ff00724234b28_991w_1218h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+
+      ],
+      "豆类": [
+        { "菜名": "麻婆豆腐", "菜系": "川菜", "特色": [], "味道": ["麻", "微辣"], "用时": "30m", "链接": { "麻婆豆腐": "https://www.xiachufang.com/recipe/78140/" }, "图片": "https://i2.chuimg.com/f8f10c40efea45099c416a2ed9123d4a_1864w_1242h.jpg" },
+        { "菜名": "脆皮豆腐", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "脆皮豆腐": "https://www.xiachufang.com/recipe/104643213/" }, "图片": "https://i2.chuimg.com/e88fc12162e74eb38b1f4303d3205538_1078w_720h.jpg" },
+        { "菜名": "家常豆腐", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "家常豆腐": "https://www.xiachufang.com/recipe/104337555/" }, "图片": "https://i2.chuimg.com/2cb78ce84e6e49d0842635d13191f783_600w_480h.jpg" },
+        { "菜名": "金针菇豆腐煲", "菜系": "日料", "特色": [], "味道": [], "用时": "30m", "链接": { "金针菇豆腐煲": "https://www.xiachufang.com/recipe/105834401/" }, "图片": "https://i2.chuimg.com/6d4ec3f927ce42fdbe0f46d33b3db9ab_2560w_2560h.jpg" },
+        { "菜名": "红烧豆腐", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "红烧豆腐": "https://www.xiachufang.com/recipe/102333700/" }, "图片": "https://i2.chuimg.com/195d38a2880211e6a9a10242ac110002_600w_400h.jpg" },
+        { "菜名": "豆花/豆腐脑", "菜系": "川菜", "特色": [], "味道": [], "用时": "30m", "链接": { "豆花水煮牛肉": "https://www.xiachufang.com/recipe/106590753/", "咸豆腐脑": "", "甜豆腐脑": "" }, "图片": "https://i2.chuimg.com/64fe3d5a178b4c51a950797b3741da43_1080w_1920h.jpg" },
+        { "菜名": "酿豆腐", "菜系": "客家菜", "特色": [], "味道": [], "用时": "30m", "链接": { "酿豆腐": "https://www.xiachufang.com/recipe/105998181/" }, "图片": "https://i2.chuimg.com/cd8dda9b2c8d4ac0960cfa82ce17035a_3024w_2268h.jpg" },
+        { "菜名": "小葱拌豆腐", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "小葱拌豆腐": "https://www.xiachufang.com/recipe/106151828/" }, "图片": "https://i2.chuimg.com/8cd29e0bc3e04fcfb653cce3079a879b_820w_1824h.jpg" },
+        { "菜名": "豆腐蒸蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "肉末豆腐蒸蛋": "https://www.xiachufang.com/recipe/104057101/", "虾仁豆腐蒸水蛋": "https://www.xiachufang.com/recipe/101858672/" }, "图片": "https://i2.chuimg.com/f6e3072534214f18a6bf35b1555968ec_1125w_831h.jpg" },
+        { "菜名": "油豆腐/豆泡", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "油豆腐": "https://www.xiachufang.com/recipe/106104250/", "白菜焖豆泡": "https://www.xiachufang.com/recipe/106389253/", "肉末炒豆泡": "https://www.xiachufang.com/recipe/107467995/", "油豆泡塞肉": "https://www.xiachufang.com/recipe/104101699/" }, "图片": "https://i2.chuimg.com/c7fb26f96e964e9ea91c20cb975db229_1280w_960h.jpg" },
+        { "菜名": "豆筋烧五花肉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "豆筋烧五花肉": "https://www.xiachufang.com/recipe/30252/" }, "图片": "https://i2.chuimg.com/ba3b27fc86f411e6b87c0242ac110003_490w_732h.jpg" },
+        { "菜名": "腐乳烧排骨", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "腐乳烧排骨": "https://www.xiachufang.com/recipe/267584/" }, "图片": "https://i2.chuimg.com/b7423282ac9411e6bc9d0242ac110002_1280w_853h.jpg" },
+        { "菜名": "青椒豆腐干", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "青椒豆腐干": "https://www.xiachufang.com/recipe/100345725/" }, "图片": "https://i2.chuimg.com/9d24fe74885a11e6b87c0242ac110003_640w_640h.jpg" },
+        { "菜名": "腐竹烧香菇", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "腐竹烧香菇": "https://www.xiachufang.com/recipe/102125564/" }, "图片": "https://i2.chuimg.com/18db9d597a67429f9e96d2bd923e5d6c_1500w_1124h.jpg" },
+        { "菜名": "油焖千张", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "油焖千张": "https://www.xiachufang.com/recipe/106404239/" }, "图片": "https://i2.chuimg.com/3e14f15cca264706bb7a2e933705a4b9_534w_300h.gif" },
+        { "菜名": "金针菇豆皮卷", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "金针菇豆皮卷": "https://www.xiachufang.com/recipe/104449303/" }, "图片": "https://i2.chuimg.com/fb8117b9567a4123b02d25ea179a9c88_3024w_4032h.jpg" },
+        { "菜名": "红烧素鸡", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "红烧素鸡": "https://www.xiachufang.com/recipe/104431785/" }, "图片": "https://i2.chuimg.com/7bc11b15a04047ca8811a3ea669d5942_1242w_1242h.jpg" },
+      ],
+      "红烧/卤味": [
+        { "菜名": "红烧肉", "菜系": "本帮菜", "特色": ["八角", "桂皮", "香叶"], "味道": ["甜", "咸"], "用时": "90m", "链接": { "家常红烧肉": "https://www.xiachufang.com/recipe/100124682/","上海本帮红烧肉": "https://www.xiachufang.com/recipe/102854243/","湖南毛氏红烧肉": "https://www.xiachufang.com/recipe/107506407/","鹌鹑蛋红烧肉": "https://www.xiachufang.com/recipe/102246523/","简易版红烧肉": "https://www.xiachufang.com/recipe/107303452/" }, "图片": "https://i2.chuimg.com/49134dd4b6ab44bf91d0c7fbb51bca63_4032w_3024h.jpg" },
+        { "菜名": "东坡肉", "菜系": "浙菜", "特色": ["花雕酒"], "味道": ["甜"], "用时": "180m", "链接": { "东坡肉": "https://www.xiachufang.com/recipe/104256237/" }, "图片": "https://i2.chuimg.com/a0abb8b3c2874da1bf7dae7328773631_450w_678h.jpg" },
+        { "菜名": "红烧排骨", "菜系": "本帮菜", "特色": ["八角"], "味道": ["甜", "咸"], "用时": "90m", "链接": { "红烧排骨": "https://www.xiachufang.com/recipe/9730/" }, "图片": "https://i2.chuimg.com/91fabc6886ee11e6b87c0242ac110003_441w_308h.jpg" },
+        { "菜名": "红烧狮子头/四喜丸子", "菜系": "淮扬菜", "特色": ["八角"], "味道": ["咸"], "用时": "120m", "链接": { "狮子头": "https://www.xiachufang.com/recipe/113188/" }, "图片": "https://i2.chuimg.com/519eae2206dd4ca785245b09b5354c19_1124w_1124h.jpg" },
+        { "菜名": "叉烧", "菜系": "粤菜", "特色": ["南乳", "红曲粉"], "味道": ["甜", "咸"], "用时": "90m", "链接": { "叉烧": "https://www.xiachufang.com/recipe/264286/" }, "图片": "https://i2.chuimg.com/123ef86ea18449659cd0ae474ca09247_1280w_1254h.jpg" },
+        { "菜名": "红烧蹄膀/肘子", "菜系": "本帮菜", "特色": ["八角"], "味道": ["甜", "咸"], "用时": "90m", "链接": { "红烧蹄膀": "https://www.xiachufang.com/recipe/105638398/" }, "图片": "https://i2.chuimg.com/86015084e22411e6947d0242ac110002_2000w_2001h.jpg" },
+        { "菜名": "红烧肥肠", "菜系": "鲁菜", "特色": ["八角"], "味道": ["甜", "咸"], "用时": "90m", "链接": { "红烧肥肠": "https://www.xiachufang.com/recipe/100420217/" }, "图片": "https://i2.chuimg.com/f1d5c14df30a42a8900fa0cbec277aec_1080w_1080h.jpg" },
+        { "菜名": "九转大肠", "菜系": "鲁菜", "特色": [ "肉桂"], "味道": ["甜", "咸"], "用时": "120m", "链接": { "九转大肠": "https://www.xiachufang.com/recipe/106822158/" }, "图片": "https://i2.chuimg.com/f6f9633a35ad11e7947d0242ac110002_1280w_960h.jpg" },
+        { "菜名": "卤猪蹄", "菜系": "川菜", "特色": ["八角"], "味道": ["咸", "麻"], "用时": "120m", "链接": { "卤猪蹄": "https://www.xiachufang.com/recipe/101834259/" }, "图片": "https://i2.chuimg.com/164536728b2e11e6b87c0242ac110003_1537w_1081h.jpg" },
+        { "菜名": "黄焖鸡", "菜系": "鲁菜", "特色": [], "味道": [], "用时": "120m", "链接": { "黄焖鸡": "https://www.xiachufang.com/recipe/100561009/" }, "图片": "https://i2.chuimg.com/2e9638783fb247ad9ea03be159578605_534w_300h.gif" },
+        { "菜名": "大盘鸡", "菜系": "新疆菜", "特色": [], "味道": ["微辣"], "用时": "90m", "链接": { "大盘鸡": "https://www.xiachufang.com/recipe/100038875/" }, "图片": "https://i2.chuimg.com/0fd9a6e062d511e7947d0242ac110002_1080w_864h.jpg" },
+        { "菜名": "红烧鸡爪", "菜系": "川菜", "特色": [], "味道": [], "用时": "90m", "链接": { "红烧鸡爪": "https://www.xiachufang.com/recipe/263454/" }, "图片": "https://i2.chuimg.com/bb44c5aa873411e6a9a10242ac110002_426w_640h.jpg" },
+        { "菜名": "可乐鸡翅", "菜系": "川菜", "特色": [], "味道": [], "用时": "40m", "链接": { "可乐鸡翅": "https://www.xiachufang.com/recipe/102203515/" }, "图片": "https://i2.chuimg.com/86d43f14f05a11e6947d0242ac110002_1280w_856h.jpg" },
+        { "菜名": "卤鸡腿", "菜系": "川菜", "特色": [], "味道": [], "用时": "120m", "链接": { "卤鸡腿": "https://www.xiachufang.com/recipe/100414097/" }, "图片": "https://i2.chuimg.com/d84fedf688b411e6b87c0242ac110003_640w_424h.jpg" },
+        { "菜名": "菠萝咕咾肉", "菜系": "粤菜", "特色": [], "味道": ["酸甜"], "用时": "30m", "链接": { "咕咾肉": "https://www.xiachufang.com/recipe/102186364/" }, "图片": "https://i2.chuimg.com/e55f1d3065844985a79e7d324debbfc7_3264w_2448h.jpg" },
+        { "菜名": "糖醋里脊", "菜系": "鲁菜", "特色": [], "味道": ["酸甜"], "用时": "25m", "链接": { "糖醋里脊": "https://www.xiachufang.com/recipe/254133/" }, "图片": "https://i2.chuimg.com/ef5aaf4c76af4c5a98cfdbb04beed0b6_1500w_1124h.jpg" },
+        { "菜名": "糖醋排骨", "菜系": "家常菜", "特色": [], "味道": ["酸甜"], "用时": "45m", "链接": { "糖醋排骨": "https://www.xiachufang.com/recipe/1064357/" }, "图片": "https://i2.chuimg.com/4daad8ea877a11e6a9a10242ac110002_469w_701h.jpg" },
+        { "菜名": "糖醋鲤鱼", "菜系": "鲁菜", "特色": [], "味道": ["酸甜"], "用时": "90m", "链接": { "糖醋鲤鱼": "https://www.xiachufang.com/recipe/103672826/" }, "图片": "https://i2.chuimg.com/2fda0d5f57dc4f0c86f95307ced61596_1000w_667h.jpg" },
+        { "菜名": "蒜香排骨", "菜系": "家常菜", "特色": [], "味道": [], "用时": "45m", "链接": { "蒜香排骨": "https://www.xiachufang.com/recipe/106774024/" }, "图片": "https://i2.chuimg.com/e4477a925de84754b9fcf46da1b5fe17_1000w_750h.jpg" },
+        { "菜名": "土豆排骨", "菜系": "家常菜", "特色": [], "味道": ["咸"], "用时": "45m", "链接": { "土豆排骨": "https://www.xiachufang.com/recipe/103884111/" }, "图片": "https://i2.chuimg.com/2cf481dd07a44f04b4b9d4639d1abe52_1254w_1003h.jpg" },
+        { "菜名": "把子肉", "菜系": "鲁菜", "特色": [], "味道": ["甜", "咸"], "用时": "90m", "链接": { "把子肉": "https://www.xiachufang.com/recipe/133948/" }, "图片": "https://i2.chuimg.com/20d6764a871011e6a9a10242ac110002_450w_675h.jpg" },
+        { "菜名": "冬瓜酿肉", "菜系": "家常菜", "特色": [], "味道": ["鲜"], "用时": "45m", "链接": { "冬瓜酿肉": "https://www.xiachufang.com/recipe/106845819/" }, "图片": "https://i2.chuimg.com/b293f0b38f3c4575a14def10f75da8cb_1170w_1158h.jpg" },
+        { "菜名": "台式卤肉饭", "菜系": "闽菜", "特色": [], "味道": ["咸"], "用时": "45m", "链接": { "台式卤肉饭": "https://www.xiachufang.com/recipe/1002825/" }, "图片": "https://i2.chuimg.com/260ad5b2c003498ba3c71a70d5fa7f5e_1280w_854h.jpg" },
+        { "菜名": "红烧牛肉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "90m", "链接": { "红烧牛肉": "https://www.xiachufang.com/recipe/100464831/" }, "图片": "https://i2.chuimg.com/2fce2658c6f242809c0470effcb66e06_1616w_1080h.jpg" },
+        { "菜名": "酱牛肉", "菜系": "鲁菜", "特色": [], "味道": ["咸"], "用时": "120m", "链接": { "酱牛肉": "https://www.xiachufang.com/recipe/106332273/" }, "图片": "https://i2.chuimg.com/f78f0de4e4044486817c51f1b16732a2_750w_750h.jpg" },
+        { "菜名": "咖喱牛肉", "菜系": "印度菜", "特色": ["咖喱"], "味道": [], "用时": "90m", "链接": { "咖喱牛肉": "https://www.xiachufang.com/recipe/100436928/" }, "图片": "https://i2.chuimg.com/9ed25c0d9e91414690d1a375f9e2c083_960w_1280h.jpg" },
+        { "菜名": "红烧鱼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "90m", "链接": { "红烧鱼": "https://www.xiachufang.com/recipe/261654/" }, "图片": "https://i2.chuimg.com/98d9064cba1d4d57a2326c1498ce0c82_1280w_1023h.jpg" },
+        { "菜名": "荣昌卤鹅", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "荣昌卤鹅": "" }, "图片": "" },
+      ],
+      "蒸煮炖": [
+        { "菜名": "粉蒸肉", "菜系": "湘菜", "特色": ["八角", "豆瓣酱"], "味道": ["咸"], "用时": "90m", "链接": { "粉蒸肉": "https://www.xiachufang.com/recipe/106525041/" }, "图片": "https://i2.chuimg.com/100499528a7e11e6b87c0242ac110003_1280w_960h.jpg" },
+        { "菜名": "梅菜扣肉/烧白", "菜系": "粤菜", "特色": ["八角"], "味道": ["咸"], "用时": "120m", "链接": { "梅菜扣肉": "https://www.xiachufang.com/recipe/102183830/", "咸烧白": "https://www.xiachufang.com/recipe/103653313/?recipe_type=1&page_scene=6" }, "图片": "https://i2.chuimg.com/f5100bf0d78411e6bc9d0242ac110002_1280w_856h.jpg" },
+        { "菜名": "白灼虾", "菜系": "浙菜", "特色": [], "味道": ["甜", "鲜"], "用时": "20m", "链接": { "白灼虾": "https://www.xiachufang.com/recipe/106147494/" }, "图片": "https://i2.chuimg.com/7ed8253086ee11e6a9a10242ac110002_450w_450h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "蒜蓉粉丝虾", "菜系": "浙菜", "特色": [], "味道": [], "用时": "45m", "链接": { "蒜蓉粉丝虾": "https://www.xiachufang.com/recipe/104476482/" }, "图片": "https://i2.chuimg.com/aac6c58be2994f9692ec792922a771b7_1366w_1093h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "水煮肉片", "菜系": "川菜", "特色": ["豆瓣酱", "干辣椒"], "味道": ["特辣", "麻"], "用时": "25m", "链接": { "水煮肉片": "https://www.xiachufang.com/recipe/104275022/" }, "图片": "https://i2.chuimg.com/3b18e791794e4557bf6838ac08b7e1a8_1292w_799h.png" },
+        { "菜名": "猪肉炖粉条", "菜系": "东北菜", "特色": [], "味道": [], "用时": "45m", "链接": { "猪肉炖粉条": "https://www.xiachufang.com/recipe/104600374/" }, "图片": "https://i2.chuimg.com/8b92197a58a74de28352c1a15b1b0432_725w_725h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "啤酒鸭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "啤酒鸭": "https://www.xiachufang.com/recipe/257181/" }, "图片": "https://i2.chuimg.com/09156e4d1bf14a0ba31bd57718ac52a0_2668w_1778h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "水煮鱼", "菜系": "家常菜", "特色": [], "味道": ["中辣", "麻"], "用时": "45m", "链接": { "水煮鱼": "https://www.xiachufang.com/recipe/1075039/" }, "图片": "https://i2.chuimg.com/a6228868879011e6a9a10242ac110002_1000w_830h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "酸菜鱼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "45m", "链接": { "酸菜鱼": "https://www.xiachufang.com/recipe/100458895/" }, "图片": "https://i2.chuimg.com/ef0ed2ce081a11e7947d0242ac110002_2304w_1728h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "清蒸鲈鱼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "清蒸鲈鱼": "https://www.xiachufang.com/recipe/264051/" }, "图片": "https://i2.chuimg.com/915d38c577054489bbdf72f9dd563421_960w_1280h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "铁锅炖大鹅", "菜系": "东北菜", "特色": [], "味道": [], "用时": "60m", "链接": { "铁锅炖大鹅": "https://www.xiachufang.com/recipe/104606063/" }, "图片": "https://i2.chuimg.com/e5ff5519cfa44f1685dc1abb94d74665_1153w_908h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "麻辣烫", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "麻辣烫": "" }, "图片": "" },
+        { "菜名": "关东煮", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "关东煮": "" }, "图片": "" },
+        { "菜名": "钵钵鸡", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "关东煮": "" }, "图片": "" },
+      ],
+      "煎炸烤": [
+        { "菜名": "锅包肉", "菜系": "东北菜", "特色": [], "味道": ["酸甜"], "用时": "30m", "链接": { "传统老式锅包肉": "https://www.xiachufang.com/recipe/100371213/","辽宁番茄酱锅包肉": "https://www.xiachufang.com/recipe/1009086/","内蒙赤峰锅包肉": "https://www.xiachufang.com/recipe/103766508/" }, "图片": "https://i2.chuimg.com/be4f8568562911e7bc9d0242ac110002_1836w_1836h.jpg" },
+        { "菜名": "溜肉段", "菜系": "东北菜", "特色": [], "味道": ["酸甜"], "用时": "30m", "链接": { "溜肉段": "https://www.xiachufang.com/recipe/270171/" }, "图片": "https://i2.chuimg.com/87ad51f58ad54bccb9638b7d92610761_3414w_2560h.jpg" },
+        { "菜名": "万州烤鱼", "菜系": "川菜", "特色": ["香菜"], "味道": ["中辣"], "用时": "90m", "链接": { "万州烤鱼": "https://www.xiachufang.com/recipe/1025154/" }, "图片": "https://i2.chuimg.com/cbe6c87b1f33441b9d1cd66eac7739a1_4032w_3024h.jpg" },
+        { "菜名": "香煎五花肉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "香煎五花肉": "https://www.xiachufang.com/recipe/201741/" }, "图片": "https://i2.chuimg.com/88332503a27149a28248fc520ad89b33_1280w_1709h.jpg" },
+        { "菜名": "脆皮五花肉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "脆皮五花肉": "" }, "图片": "" },
+        { "菜名": "咸蛋黄焗南瓜", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "咸蛋黄焗南瓜": "" }, "图片": "" },
+        { "菜名": "北京烤鸭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "北京烤鸭": "" }, "图片": "" },
+        { "菜名": "炸薯条", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "炸薯条": "" }, "图片": "" },
+        { "菜名": "炸薯片", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "炸薯片": "" }, "图片": "" },
+        { "菜名": "炸平菇", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "炸平菇": "" }, "图片": "" },
+        { "菜名": "炸鸡排", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "炸平菇": "" }, "图片": "" },
+        { "菜名": "炸鲜奶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "炸平菇": "" }, "图片": "" },
+        { "菜名": "炸春卷", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "炸平菇": "" }, "图片": "" },
+        { "菜名": "炸茄盒", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "炸平菇": "" }, "图片": "" },
+        { "菜名": "锅巴土豆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "锅巴土豆": "" }, "图片": "" },
+        { "菜名": "油炸花生米", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "油炸花生米": "" }, "图片": "" },
+
+      ],
+      "烧烤": [
+        { "菜名": "烧烤-肉类", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": {"羊肉串": "https://www.xiachufang.com/recipe/104438073/", "牛肉串": "", "五花肉串": "", "鸡翅": "", "鸡心": "", "鸡胗": "", "鸡皮": "", "鸡腿肉": "", "牛板筋": "", "猪脆骨": "", "羊腰子": "", "牛舌": "", "驴肉串": "", "鸭心": "", "鸭胗": "", "鸭肠": "", "鸭舌": "", "肥肠": "", "腊肠": "", "火腿肠": "", "培根卷金针菇": "", "牛肉粒": "", "鹿肉串": "", "兔肉串": "", "羊腰": "", "鸡肝": "", "鸭肝": "", "猪脑": "", "牛肚": "", "黄喉": "", "牛百叶": "", "鸡冠": "", "鸡肾": "", "鱼泡": "", "金针菇肥牛卷": "", "培根": "", "藕夹肉": "", "韭菜包金针菇": "",  "云南包浆豆腐": "", "延吉烤冷面": "", "长沙口味虾": "", "四川烤脑花": "", "贵州烤豆腐果": "", "东北烤蚕蛹": "",}, "图片": "https://i2.chuimg.com/dddaf0a28bf54b2bab327d04dcacdd34_3780w_3022h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "烧烤-海鲜类", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "生蚝": "https://www.xiachufang.com/recipe/102847162/", "扇贝": "", "大虾": "", "鱿鱼": "", "墨鱼": "", "海带": "", "秋刀鱼": "", "鲳鱼": "", "黄花鱼": "", "鲫鱼": "", "泥鳅": "", "皮皮虾": "", "海螺": "", "鲍鱼": "", "海胆": "", "章鱼": "", "小黄鱼": "", "多宝鱼": "","鱼豆腐": "",}, "图片": "https://i2.chuimg.com/d716911f08e04622928630f86e5dceac_2448w_1632h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "烧烤-蔬菜类", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "韭菜": "https://www.xiachufang.com/recipe/39410/", "金针菇": "", "茄子": "", "青椒": "", "土豆": "", "玉米": "", "蘑菇": "", "香菇": "", "平菇": "", "藕片": "", "西兰花": "", "花菜": "", "洋葱": "", "大蒜": "", "小番茄": "", "芦笋": "", "南瓜": "", "红薯": "", "山药": "", "黄瓜": "", "豆腐皮": "", "千张": "", "豆干": "", "腐竹": "", "素鸡": "", "油豆腐": "", "冻豆腐": "", "豆泡": "", "豆筋": "", "面筋": "", "蒜苔": "", "香菜": "", "白菜": "", "杏鲍菇": "", "彩椒": "", "苕皮": "" }, "图片": "https://i2.chuimg.com/92cc7d297bb046a9ac6c98c10056c0a5_3024w_3024h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "烧烤-主食类", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "馒头片": "https://www.xiachufang.com/recipe/106769348/", "花卷": "", "淄博烧烤小饼": "", "面包片": "", "年糕": "", "糍粑": "", "米饭团": "", "披萨角": "", "包子": "", "饺子": "",}, "图片": "https://i2.chuimg.com/485e3c4084384600bfa6708ddfaaec1d_1920w_1920h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+      ],
+      "干锅": [
+        { "菜名": "干锅-猪肉类", "菜系": "川菜", "特色": [], "味道": ["麻辣"], "用时": "60m", "链接": { "排骨":"https://www.xiachufang.com/recipe/101816163/", "五花肉":"",  "腊肉":"", "猪蹄":"", "丸子":""}, "图片": "https://i2.chuimg.com/dbbb20861c6211e7bc9d0242ac110002_1440w_1152h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "干锅-鸡鸭类", "菜系": "川菜", "特色": [], "味道": ["麻辣"], "用时": "60m", "链接": { "鸡":"https://www.xiachufang.com/recipe/269870/", "鸡翅":"", "鸡腿":"", "鸡杂":"", "鸭":"", "鸭翅":"", "兔": ""}, "图片": "https://i2.chuimg.com/6b5a5eca873811e6b87c0242ac110003_450w_678h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "干锅-牛羊类", "菜系": "川菜", "特色": [], "味道": ["麻辣"], "用时": "60m", "链接": { "牛肉":"https://www.xiachufang.com/recipe/107508577/", "牛腩":"", "牛杂":"", "羊肉":"", "羊排":""}, "图片": "https://i2.chuimg.com/ce064eef4a5d4a008dc76ee302cac395_1280w_1280h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "干锅-鱼虾类", "菜系": "川菜", "特色": [], "味道": ["麻辣"], "用时": "60m", "链接": { "虾":"https://www.xiachufang.com/recipe/1046538/", "牛蛙":"", "耗儿鱼":"", "带鱼":"", "草鱼":""}, "图片": "https://i2.chuimg.com/33389c92876411e6b87c0242ac110003_384w_512h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "干锅-素菜", "菜系": "川菜", "特色": [], "味道": ["麻辣"], "用时": "60m", "链接": { "花菜": "https://www.xiachufang.com/recipe/100496240/", "土豆": "", "藕片": "", "香菇": "", "杏鲍菇": "", "茶树菇": "", "木耳": "", "包菜": "", "娃娃菜": "", "豆皮": "", "脆笋": "", "莴笋": "", "玉米": "", "洋葱": "", "青红椒": "" }, "图片": "https://i2.chuimg.com/21f2874e891311e6a9a10242ac110002_430w_323h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+
+      ],
+      "火锅": [
+        { "菜名": "重庆火锅-肉类", "菜系": "川菜", "特色": [], "味道": [], "用时": "30m", "链接": {"肥牛卷":"", "羊肉片":"", "五花肉":"", "里脊":"", "嫩肉片":"", "老肉片":"", "牛百叶":"", "毛肚":"", "黄喉":"", "牛肚":"", "牛舌":"", "牛筋":"", "猪脑":"", "鸡胗":"", "鸡心":"", "鸭血":"", "鸭肠":"", "鹅肠":"", "午餐肉":"", "火腿片":"", "牛蛙":"", "虾滑":"", "鱼丸":"", "牛肉丸":"", "贡丸":"", "鱿鱼圈":"", "墨鱼仔":"", "肥肠":"","撒尿牛丸":"","潮汕牛筋丸":"","虾饺":"", }, "图片": "" },
+        { "菜名": "重庆火锅-海鲜类", "菜系": "川菜", "特色": [], "味道": [], "用时": "30m", "链接": {"大虾":"", "扇贝":"", "生蚝":"", "青蛤":"", "蛏子":"", "花蛤":"", "鲍鱼":"", "海螺片":"", "鱼片":"", "蟹棒":"", "蟹籽丸":"", "章鱼足":"", "北极贝":"", "鱼豆腐":"","基围虾":"", "乌鱼仔":"", "鸳鸯贝":"", "鱿鱼圈":"", "墨鱼仔":"","海带苗":"", "裙带菜":"", }, "图片": "" },
+        { "菜名": "重庆火锅-蔬菜类", "菜系": "川菜", "特色": [], "味道": [], "用时": "30m", "链接": {"嫩豆腐":"", "老豆腐":"", "油豆腐":"", "冻豆腐":"", "千张":"", "豆腐皮":"", "腐竹":"", "素鸡":"", "豆干":"", "豆泡":"", "大白菜":"", "茼蒿":"", "菠菜":"", "油麦菜":"", "生菜":"", "空心菜":"", "韭菜":"", "娃娃菜": "", "芹菜":"","酸菜":"","贡菜":"","竹笋":"", "西兰花":"", "土豆片":"", "莲藕片":"", "冬瓜片":"", "南瓜片":"", "萝卜片":"", "玉米":"", "山药片":"", "茭白":"", "芦笋":"", "黄瓜":"", "香菇":"", "金针菇":"", "平菇":"", "杏鲍菇":"", "茶树菇":"", "木耳":"", "羊肚菌":"", "松茸":"", "鸡枞菌":"", "牛肝菌":"", "竹荪":"", "鹿茸菇":"", "海鲜菇":"", "鹌鹑蛋":"", "鸡蛋":"", "皮蛋":"", "卤蛋":"", "鱼籽福袋":"", "爆浆小豆腐":"",}, "图片": "" },
+        { "菜名": "重庆火锅-主食类", "菜系": "川菜", "特色": [], "味道": [], "用时": "30m", "链接": {"粉丝":"", "红薯粉":"", "土豆粉":"", "宽粉":"", "魔芋丝":"", "米线":"", "乌冬面":"", "拉面":"", "方便面":"", "年糕":"", "糍粑":"", }, "图片": "" },
+        { "菜名": "重庆火锅-锅底", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "红汤锅底": "","菌汤锅底": "","番茄锅底": "","粥汤锅底": "","鸳鸯锅底": "", }, "图片": "" },
+        { "菜名": "广东打边炉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "潮汕牛肉火锅", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "北京涮羊肉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "云南野生菌子火锅", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "贵州酸汤火锅", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "海南椰子鸡火锅", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "东北酸菜白肉锅", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "江浙菊花暖锅", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "广西螺蛳粉火锅", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "台式麻辣鸭血锅", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "藏区牦牛肉火锅", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "湘西腊肉锅", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "韩式部队火锅", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "日式寿喜烧", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "澳门豆捞", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ]
+    },
+    "主食": {
+      "面条": [
+        { "菜名": "兰州牛肉面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "山西刀削面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "北京炸酱面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "武汉热干面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "四川担担面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "陕西油泼面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "陕西𰻞𰻞面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "河南烩面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "重庆小面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "阳春面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "延吉冷面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "荣昌铺盖面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "武胜猪肝面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "苏州奥灶面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "杭州片儿川", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "广东云吞面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "宜宾燃面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "新疆拉条子", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "山东炝锅面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "福建沙县拌面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "贵州肠旺面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "安徽板面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "岐山臊子面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "河北饸饹面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "宁夏羊肉小揪面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "老北京打卤面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "山西莜面栲栳栳", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "宁波咸齑黄鱼面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "镇江锅盖面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "海南腌粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "广式干炒牛河", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "葱油拌面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "酸辣粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "厦门沙茶面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "四川甜水面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "潮汕粿条汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "东北烤冷面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "湖北襄阳牛肉面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "西藏藏面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "香港车仔面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "山西剔尖", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "甘肃浆水面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "番茄鸡蛋面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "红烧牛肉面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "香菇滑鸡面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "雪菜肉丝面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "香菇肉酱打卤面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "豆角焖面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "葱油拌面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "炒方便面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "意大利面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "面疙瘩", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "饸饹面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "": "" }, "图片": "" },
+      ],
+      "饼类": [
+        { "菜名": "鸡蛋灌饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "煎饼果子", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "韭菜盒子", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "肉夹馍", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "发面饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "陕西锅盔", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "杂粮煎饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "天津大麻花", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "驴肉火烧", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "河南烙馍", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "新疆馕", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "福建光饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "云南鲜花饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "梅干菜烧饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "葱油饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "土家酱香饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "印度飞饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "鸡蛋水饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "土豆丝火腿鸡蛋饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "手抓饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "酸奶松饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "韭菜肉饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "千层饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "奶香玉米饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "胡萝卜丝蔬菜饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "燕麦鸡蛋饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "土豆丝饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "萝卜丝饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "南瓜饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "红薯饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "芝麻烧饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "油酥饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "春饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "上海蟹壳黄", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "军屯锅盔", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "锅盔夹凉粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "甘肃油锅盔", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "内蒙古奶皮子饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "西藏青稞饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "黄山烧饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "红糖锅盔", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "牛舌烧饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "石子馍", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "牛肉馅饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "粉类": [
+        { "菜名": "螺蛳粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "炸蛋":"", "豆泡":"", "炸火腿肠":"", "虎皮鸡爪":"", "酸豆角":"", "酸笋":"", "花生":"", "腐竹":"", "响铃卷":"", "卤蛋":"", "猪皮":"", }, "图片": "" },
+        { "菜名": "过桥米线", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "江西南昌拌粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "贵州羊肉粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "重庆酸辣粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "花溪牛肉粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "绵阳米粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "南昌拌粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "新疆炒米粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "衡阳鱼粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "猪脚粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "顺庆羊肉粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "海南抱罗粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "广东肠粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "广西老友粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "酸菜肉丝粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "三鲜米粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "鸭血粉丝汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "炒米粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "肥肠粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "蕨根粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "河粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "凉粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "凉皮", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "包子": [
+        { "菜名": "小笼包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "狗不理包子", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "叉烧包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "鲜肉包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "韭菜鸡蛋包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "豆沙包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "奶黄包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "梅干菜肉包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "酱肉包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "三鲜包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "生煎包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "流沙包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "新疆烤包子", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "扬州三丁包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "灌汤包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "白菜猪肉包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "萝卜丝包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "香菇青菜包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "酸菜粉丝包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "紫薯包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "南瓜包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "蟹粉小笼包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "云南破酥包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "陕西地软包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "东北酸菜猪肉包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "麻辣小龙虾包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "咸蛋黄肉松包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "黑芝麻包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "芋泥包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "奥尔良鸡肉包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "紫米包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "其他米/面食": [
+        { "菜名": "馒头", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "红糖馒头", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "花卷", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "抄手/馄饨/云吞", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "饺子/蒸饺/煎饺", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "韭菜鸡蛋馅":"","猪肉大葱馅":"","白菜猪肉馅":"","芹菜猪肉馅":"","三鲜馅":"","香菇猪肉馅":"","胡萝卜羊肉馅":"","茴香猪肉馅":"","酸菜猪肉馅":"","玉米猪肉馅":"","鲅鱼馅":"","虾仁鸡蛋馅":"","牛肉洋葱馅":"","马齿苋馅":"","荠菜猪肉馅":"","西葫芦鸡蛋馅":"","豆腐粉丝馅":"","驴肉馅":"","蟹黄馅":"","香菜猪肉馅":"","番茄鸡蛋馅":"","青椒猪肉馅":"","莲藕猪肉馅":"","紫菜虾仁馅":"","咖喱牛肉馅":"","麻辣小龙虾馅":"","芝士培根馅":"","黑椒牛肉馅":"","咸蛋黄馅":"","豆角猪肉馅":"", }, "图片": "" },
+        { "菜名": "年糕", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "汤圆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "元宵", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "锅贴", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "油条", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "蒸糕", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "麻花", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "麻圆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "三角粑", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "糍粑", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "白糕", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "蛋烘糕", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "青团", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "杂粮": [
+        { "菜名": "小米", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "玉米", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "红薯", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "南瓜", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "土豆泥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "薏仁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "高粱", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "小麦仁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "燕麦", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "荞麦", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "黑米", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "糙米", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "藜麦", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "薏米", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "青稞", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "紫米", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "糯米", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "藜麦", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "黄豆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "红豆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "绿豆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "黑豆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "白芸豆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "花芸豆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "鹰嘴豆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "蚕豆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "豌豆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "扁豆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "刀豆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "山药", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "芋头", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "紫薯", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "木薯", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "粥类": [
+        { "菜名": "时蔬鲜虾粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "皮蛋瘦肉粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "桂圆红枣粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "腊八粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "南瓜粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "八宝粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "广东艇仔粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "潮汕砂锅粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "福建咸粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "上海鸡粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "扬州菜粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "四川酸菜粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "东北大碴子粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "新疆羊肉粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "云南稀豆粉粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "银耳莲子粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "芝麻糊", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "莲子百合粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "花生红豆粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "牛奶燕麦粥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "米饭": [
+        { "菜名": "米饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "小米": "", "黑米": "", "红米": "", "东北米": "", "糙米": "", "泰国香米": "", "油粘米": "","丝苗米": "", }, "图片": "" },
+        { "菜名": "盖浇饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "番茄鸡蛋盖饭":"", "鱼香肉丝盖饭":"", "宫保鸡丁盖饭":"", "辣椒炒肉盖饭":"", "土豆回锅肉盖饭":"", "麻婆豆腐盖饭":"", "酸辣土豆丝盖饭":"", "酸汤肥牛盖饭":"", "香菇油菜盖饭":"", "咖喱鸡块盖饭":"", "豉汁排骨饭":"", "香菇滑鸡饭":"", "腊味双拼饭":"", "黑椒牛肉炒饭":"", }, "图片": "" },
+        { "菜名": "烧麦", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "黄金蛋炒饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "扬州炒饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "酱油炒饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "咸蛋黄炒饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "石锅拌饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "咖喱牛肉饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "新疆羊肉抓饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "广式煲仔饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "台湾卤肉饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "上海菜饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "东北大饭包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "云南竹筒饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "贵州糯米饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "浙江乌米饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "照烧鸡排饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "黄焖鸡米饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "日式肥牛饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "泰式菠萝炒饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "意式烩饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "八宝饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "糯米鸡", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "粽子", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "饭粿", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "荷叶饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "芝士焗饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "海鲜炒饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "泡菜炒饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "牛油果拌饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "三文鱼茶泡饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "松露炒饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "紫菜包饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "猪油拌饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "虾仁炒饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "咸鱼炒饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "什锦炒饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "蛋类": [
+        { "菜名": "鸡蛋卷", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "水煮荷包蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "煎蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "煎蛋": "https://www.xiachufang.com/recipe/261301/","煎荷包蛋": "https://www.xiachufang.com/recipe/105822846/" }, "图片": "" },
+        { "菜名": "炒蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "番茄炒蛋":"", "葱花炒蛋":"", "韭菜炒蛋":"", "苦瓜炒蛋":"", "丝瓜炒蛋":"", "虾仁炒蛋":"", "银鱼炒蛋":"", "香椿炒蛋":"", }, "图片": "" },
+        { "菜名": "蒸蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "鸡蛋羹":"","蛤蜊蒸蛋":"", "肉沫蒸蛋":"", "瑶柱蒸蛋":"", "蟹黄蒸蛋":"", "海胆蒸蛋":"", "豆腐蒸蛋":"", }, "图片": "" },
+        { "菜名": "茶叶蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "卤蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "皮蛋/松花蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "咸鸭蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "虎皮蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "三色蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "赛螃蟹", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "蛋饺", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "魔鬼蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "苏格兰蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "云朵蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "太阳蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "芙蓉蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "溏心蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "温泉蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "酱油蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "酒酿蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "蛋包饭", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "蛋挞", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "蛋卷", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "鸡蛋仔", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "鹌鹑蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+    },
+    "凉菜": {
+      "": [
+        { "菜名": "蒜泥白肉", "菜系": "川菜", "特色": [], "味道": ["辣", "香"], "用时": "30m", "链接": { "蒜泥白肉": "https://www.xiachufang.com/recipe/202502/" }, "图片": "https://i2.chuimg.com/e6914a4c9a854200880b8ee0dc50e79f_3287w_2628h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "口水鸡", "菜系": "川菜", "特色": [], "味道": ["中辣"], "用时": "30m", "链接": { "口水鸡": "https://www.xiachufang.com/recipe/106763393/" }, "图片": "https://i2.chuimg.com/8b14ec0cae0b4ca1aa1b83bc940061f8_1280w_1708h.jpg" },
+        { "菜名": "凉拌折耳根", "菜系": "家常菜", "特色": [], "味道": [], "用时": "10m", "链接": { "凉拌折耳根": "https://www.xiachufang.com/recipe/1012651/" }, "图片": "https://i2.chuimg.com/52a3343c874d11e6b87c0242ac110003_3264w_2448h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "冷吃兔", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "冷吃兔": "https://www.xiachufang.com/recipe/100452181/" }, "图片": "https://i2.chuimg.com/72c0f8e888de11e6a9a10242ac110002_650w_650h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "鸡丝凉面", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "鸡丝凉面": "https://www.xiachufang.com/recipe/104555011/" }, "图片": "https://i2.chuimg.com/90da274e82d64211ab716b428411edf9_1921w_2560h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "拍黄瓜", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "小葱拌豆腐", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "夫妻肺片", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "红油耳丝", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "麻酱凤尾", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "凉拌三丝", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "糖拌西红柿", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "东北大拉皮", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "白切鸡", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "绍兴醉虾", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "柠檬凤爪", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "凉拌-荤菜", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "猪心":"", "猪头":"", "猪耳":"", "猪舌":"","猪皮":"", "鸡丝":"", "鸡爪":"", "鸡翅":"", "鸭翅":"", "鸭脖":"", "牛肉":"", "皮蛋": "", "鱼皮": "","海蜇": "",}, "图片": "" },
+        { "菜名": "凉拌-素菜(蔬菜类)", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": {  "海带":"", "海白菜":"", "裙带菜":"", "黄瓜":"", "莴笋":"", "藕片":"", "胡萝卜":"", "洋葱":"", "白菜":"", "生菜":"", "包菜":"", "菠菜":"", "土豆":"", "番茄":"", "苦瓜":"", "竹笋":"", "豆芽":"", "海石花":"",  }, "图片": "" },
+        { "菜名": "凉拌-素菜(菌菇/主食类)", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "木耳":"", "香菇":"", "金针菇":"", "杏鲍菇":"", "腐竹":"", "豆皮":"", "豆干":"",  "毛豆":"", "花生":"", "粉条":"", "凉面":"","蕨根粉":"","魔芋丝":"","贡菜":"", }, "图片": "" },
+      ]
+    },
+    "汤羹": {
+      "肉汤": [
+        { "菜名": "海带/黄豆等炖猪蹄/排骨", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "海带":"","黄豆":"","苦瓜":"","陈皮":"","玉米":"","萝卜":"","花生":"","莲藕":"","山药":"", }, "图片": "" },
+        { "菜名": "乌鸡汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "当归":"","黄芪":"","红枣":"","枸杞":"" }, "图片": "" },
+        { "菜名": "菌菇炖鸡", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "香菇":"","茶树菇":"","姬松茸":"","真姬菇":"","竹荪":"","羊肚菌":"","鹿茸菇":"", }, "图片": "" },
+        { "菜名": "萝卜/番茄/土豆炖牛腩", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "豆腐汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "鲫鱼":"","鱼头":"","蛤蜊":"","白菜":"","丝瓜":"", }, "图片": "" },
+        { "菜名": "番茄肉片", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "番茄肉片": "" }, "图片": "" },
+        { "菜名": "汆汤肉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "汆汤肉": "" }, "图片": "" },
+        { "菜名": "清炖牛肋条", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "清炖牛肋条": "" }, "图片": "" },
+        { "菜名": "小鸡炖蘑菇", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "小鸡炖蘑菇": "" }, "图片": "" },
+        { "菜名": "罗宋汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "罗宋汤": "" }, "图片": "" },
+        { "菜名": "小吊梨汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "小吊梨汤": "https://www.xiachufang.com/recipe/100385245/" }, "图片": "https://i2.chuimg.com/63147fee8ac011e6b87c0242ac110003_900w_506h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "冰糖雪梨", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "冰糖雪梨": "https://www.xiachufang.com/recipe/185673/" }, "图片": "https://i2.chuimg.com/f86c9b15ba5348769a817c7d48c1a44c_918w_1224h.jpg?imageView2/2/w/660/interlace/1/q/75" },
+        { "菜名": "冬瓜丸子汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "当归羊肉汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "淮南牛肉汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "酸萝卜老鸭汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "猪肚鸡汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "番茄牛尾汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "鸽子汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "江西瓦罐汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "福建佛跳墙", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "黄瓜肉片汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "广东老火靓汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "甲鱼汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "花胶鸡汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "干贝萝卜汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "蛤蜊蒸蛋汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "鲍鱼鸡汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "泰式冬阴功汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "素汤" :[
+        { "菜名": "番茄鸡蛋汤", "菜系": "浙菜", "特色": [], "味道": [], "用时": "60m", "链接": { "番茄鸡蛋汤": "" }, "图片": "" },
+        { "菜名": "白菜豆腐汤", "菜系": "浙菜", "特色": [], "味道": [], "用时": "60m", "链接": { "白菜豆腐汤": "" }, "图片": "" },
+        { "菜名": "上汤大白菜", "菜系": "浙菜", "特色": [], "味道": [], "用时": "60m", "链接": { "上汤大白菜": "" }, "图片": "" },
+        { "菜名": "紫菜蛋花汤", "菜系": "浙菜", "特色": [], "味道": [], "用时": "60m", "链接": { "紫菜蛋花汤": "" }, "图片": "" },
+        { "菜名": "河南胡辣汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "酸辣汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "雪梨炖百合", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ]
+    },
+    "异国风情": {
+      "": [
+        { "菜名": "煎牛排", "菜系": "法国菜", "特色": [], "味道": [], "用时": "20m", "链接": { "牛排": "https://www.xiachufang.com/recipe/104361302/" }, "图片": "https://i2.chuimg.com/a3ec3a6777b3493189bc23a469529a77_4032w_3024h.jpg" },
+        { "菜名": "汉堡", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "披萨", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "寿司", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+
+      ]
+    },
+    "小吃": {
+      "小吃": [
+        { "菜名": "臭豆腐", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "章鱼小丸子", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "糖葫芦", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "凉糕", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "驴打滚", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "芝士热狗棒", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "糍粑", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "零食": [
+        { "菜名": "牛肉干", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "瓜子", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "花生", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "锅巴", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "辣条", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "果冻", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "薯片", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "爆米花", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "麻花", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "猫耳朵", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "坚果": [
+
+      ],
+      "饼干": [
+        { "菜名": "鲜花饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "杏仁饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "龙须酥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "桂花糕", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "绿豆糕", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "糖糕", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "薄饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "老婆饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "绿豆饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "板栗饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "太阳饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "榴莲饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "蛋黄酥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "桃酥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "月饼", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "凤梨酥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "核桃酥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "雪花酥", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "脏脏包", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "仙豆糕", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "奶枣", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "肉松小贝", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "麻薯", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "甜品": [
+        { "菜名": "蛋挞", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "冰淇淋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "蛋糕", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "龟苓膏", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "奶冻", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "提拉米苏", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "吐司", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "巧克力", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+    },
+    "饮料": {
+      "茶饮": [
+        { "菜名": "西湖龙井", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "碧螺春", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "铁观音", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "普洱茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "大红袍", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "金骏眉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "正山小种", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "毛峰", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "六安瓜片", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "信阳毛尖", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "安吉白茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "太平猴魁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "黄山毛峰", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "武夷岩茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "凤凰单丛", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "滇红", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "祁门红茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "君山银针", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "白毫银针", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "菊花茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "玫瑰花茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "茉莉花茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "桂花茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "金银花茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "安化黑茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "老白茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "苦丁茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "乌龙", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "抹茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "竹叶青", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "永川秀芽", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "老鹰茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "苦荞茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "红枣枸杞茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "果汁": [
+        { "菜名": "黄瓜汁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "西瓜汁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "芒果汁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "雪梨汁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "玉米汁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "紫薯汁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "葡萄汁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "杨桃汁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "荔枝汁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "山楂汁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "菠萝汁", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "奶茶": [
+        { "菜名": "杨枝甘露", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "芒果西米露", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "耙耙柑茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "柠檬水", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "百香果气泡水", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "柠檬蜂蜜水", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "草莓奶昔", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "阿萨姆奶茶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+      "其他": [
+        { "菜名": "冰粉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "木瓜牛奶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "酸梅汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "绿豆汤", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "双皮奶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "豆浆", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "酸奶", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+        { "菜名": "咖啡", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+      ],
+    },
+    "其他": {
+      "半成品": [
+        { "菜名": "速冻水饺", "菜系": "家常菜", "特色": [], "味道": [], "用时": "60m", "链接": { "": "" }, "图片": "" },
+
+      ],
+      "药膳": [
+
+      ],
+      "减脂餐": [
+
+      ],
+      "月子餐": [
+
+      ],
+    }
+  };
+
+  class MenuApp {
+    constructor() {
+      this.data = menuData;
+      this.filters = {
+        foodType: '',
+        cuisine: '',
+        seasonings: [],
+        tastes: [],
+        search: ''
+      };
+      this.allFilteredDishes = [];
+      this.init();
+    }
+    init() {
+      this.setupThemeSelector();
+      this.setupFilters();
+      this.renderMenu();
+      this.setupEventListeners();
+    }
+    setupThemeSelector() {
+      const themeClass = localStorage.getItem("themeClass");
+      const themeSelector = document.getElementById('themeSelector');
+      if (themeClass) {
+        document.body.className = themeClass;
+        themeSelector.value = themeClass;
+      }
+      themeSelector.addEventListener('change', (e) => {
+        document.body.className = e.target.value;
+        localStorage.setItem("themeClass", e.target.value);
+      });
+    }
+    setupFilters() {
+      this.populateCuisineFilter();
+      this.populateFoodTypeFilter();
+      this.populateSeasoningFilters();
+      this.populateTasteFilters();
+    }
+    getAllUniqueValues(key) {
+      const values = new Set();
+      Object.values(this.data).forEach(category => {
+        Object.values(category).forEach(subcategory => {
+          subcategory.forEach(dish => {
+            if (dish[key]) {
+              if (Array.isArray(dish[key])) {
+                dish[key].forEach(value => values.add(value));
+              } else {
+                values.add(dish[key]);
+              }
+            }
+          });
+        });
+      });
+      return Array.from(values).sort();
+    }
+    populateFoodTypeFilter() {
+      const foodTypes = Object.keys(this.data);
+      const select = document.getElementById('foodTypeFilter');
+      foodTypes.forEach(foodType => {
+        const option = document.createElement('option');
+        option.value = foodType;
+        option.textContent = foodType;
+        select.appendChild(option);
+      });
+    }
+    populateCuisineFilter() {
+      const cuisines = this.getAllUniqueValues('菜系');
+      const select = document.getElementById('cuisineFilter');
+      cuisines.forEach(cuisine => {
+        const option = document.createElement('option');
+        option.value = cuisine;
+        option.textContent = cuisine;
+        select.appendChild(option);
+      });
+    }
+    populateSeasoningFilters() {
+      const seasonings = this.getAllUniqueValues('特色');
+      const container = document.getElementById('seasoningFilters');
+      seasonings.forEach(seasoning => {
+        const label = document.createElement('label');
+        label.className = 'checkbox-item';
+        label.innerHTML = ` <input type="checkbox" value="${seasoning}"> <span>${seasoning}</span> `;
+        container.appendChild(label);
+      });
+    }
+    populateTasteFilters() {
+      const tastes = this.getAllUniqueValues('味道');
+      const container = document.getElementById('tasteFilters');
+      tastes.forEach(taste => {
+        const label = document.createElement('label');
+        label.className = 'checkbox-item';
+        label.innerHTML = ` <input type="checkbox" value="${taste}"> <span>${taste}</span> `;
+        container.appendChild(label);
+      });
+    }
+    setupEventListeners() {
+      document.getElementById('foodTypeFilter').addEventListener('change', (e) => {
+        this.filters.foodType = e.target.value;
+        this.renderMenu();
+      });
+      document.getElementById('cuisineFilter').addEventListener('change', (e) => {
+        this.filters.cuisine = e.target.value;
+        this.renderMenu();
+      });
+      document.getElementById('seasoningFilters').addEventListener('change', (e) => {
+        if (e.target.type === 'checkbox') {
+          this.updateCheckboxFilter('seasonings', e.target.value, e.target.checked);
+          this.renderMenu();
+        }
+      });
+      document.getElementById('tasteFilters').addEventListener('change', (e) => {
+        if (e.target.type === 'checkbox') {
+          this.updateCheckboxFilter('tastes', e.target.value, e.target.checked);
+          this.renderMenu();
+        }
+      });
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        this.filters.search = e.target.value.toLowerCase();
+        this.renderMenu();
+      });
+      const randomFoodContainer = document.getElementById('random-food');
+      document.getElementById('choose-random-food').addEventListener('click', (e) => {
+        if (!this.allFilteredDishes || this.allFilteredDishes.length === 0) {
+          randomFoodContainer.innerHTML = '没有可用的菜品数据';
+          return;
+        }
+        const randomIndex = Math.floor(Math.random() * this.allFilteredDishes.length);
+        const dish = this.allFilteredDishes[randomIndex];
+        const dishCard = this.createDishCard(dish);
+        randomFoodContainer.innerHTML = '';
+        randomFoodContainer.appendChild(dishCard);
+      });
+    }
+    updateCheckboxFilter(filterType, value, checked) {
+      if (checked) {
+        if (!this.filters[filterType].includes(value)) {
+          this.filters[filterType].push(value);
+        }
+      } else {
+        this.filters[filterType] = this.filters[filterType].filter(v => v !== value);
+      }
+    }
+    filterDish(dish) {
+      if (this.filters.cuisine && dish.菜系 !== this.filters.cuisine) {
+        return false;
+      }
+      if (this.filters.seasonings.length > 0) {
+        const dishSeasonings = dish.特色 || [];
+        if (this.filters.seasonings.some(s => dishSeasonings.includes(s))) {
+          return false;
+        }
+      }
+      if (this.filters.tastes.length > 0) {
+        const dishTastes = dish.味道 || [];
+        if (!this.filters.tastes.some(t => dishTastes.includes(t))) {
+          return false;
+        }
+      }
+      if (this.filters.search && !dish.菜名.toLowerCase().includes(this.filters.search)) {
+        return false;
+      }
+      return true;
+    }
+    renderMenu() {
+      const container = document.getElementById('menuContent');
+      container.innerHTML = '';
+      this.allFilteredDishes = [];
+      document.getElementById('random-food').innerHTML = '';
+      Object.entries(this.data).forEach(([categoryName, subcategories]) => {
+        if (this.filters.foodType === '' || this.filters.foodType === categoryName) {
+          let hasVisibleDishes = false;
+          const categoryElement = document.createElement('div');
+          const categoryTitle = document.createElement('h1');
+          categoryTitle.className = 'category-title';
+          categoryTitle.textContent = categoryName;
+          categoryTitle.id = 'category-' + categoryName
+          categoryElement.appendChild(categoryTitle);
+          Object.entries(subcategories).forEach(([subcategoryName, dishes]) => {
+            const filteredDishes = dishes.filter(dish => this.filterDish(dish));
+            if (filteredDishes.length > 0) {
+              hasVisibleDishes = true;
+              const subcategoryTitle = document.createElement('h2');
+              subcategoryTitle.className = 'subcategory-title';
+              subcategoryTitle.textContent = subcategoryName;
+              categoryElement.appendChild(subcategoryTitle);
+              filteredDishes.sort((a, b) => {
+                const aHasImage = a.图片;
+                const bHasImage = b.图片;
+                if (aHasImage && !bHasImage) return -1;
+                if (!aHasImage && bHasImage) return 1;
+                return 0;
+              });
+              const dishesGrid = document.createElement('div');
+              dishesGrid.className = 'dishes-grid';
+              filteredDishes.forEach(dish => {
+                const dishCard = this.createDishCard(dish);
+                dishesGrid.appendChild(dishCard);
+              });
+              categoryElement.appendChild(dishesGrid);
+            }
+            this.allFilteredDishes.push(...filteredDishes)
+          });
+          if (hasVisibleDishes) {
+            container.appendChild(categoryElement);
+          }
+      }});
+    }
+
+    createDishCard(dish) {
+      const card = document.createElement('div');
+      const hasImage = dish.图片;
+      card.className = `dish-card ${hasImage ? '' : 'no-image'}`;
+      const links = dish.链接;
+      const linkKeys = Object.keys(links);
+      let targetLink = ""
+      if (linkKeys.length !== 1) {
+        const selectId = `link-${Math.random().toString(36).substr(2, 9)}`;
+        targetLink = `<select class="link-dropdown" id="${selectId}" onchange="window.open(this.value, '_blank')">
+                            ${linkKeys.map((key, index) => `<option value="${links[key]}" ${index === 0 ? "selected":""}>${key}</option>`).join('')}
+                        </select>`;
+      }
+      if (hasImage) {
+        card.innerHTML = `<div class="dish-image">
+                            <img src="${dish.图片}" alt="${dish.菜名}" onerror="this.parentElement.style.display='none'">
+                            ${dish.价格 ? `<div class="price-tag">¥${dish.价格}</div>` : ''}
+                        </div>
+                        <div class="dish-info">
+                            <div class="dish-name" title="${dish.菜名}">
+                                ${this.createDishNameWithLinks(dish)}
+                            </div>
+                            <div class="tags-row">
+                                ${dish.用时 ? `<span class="tag tag-time">${dish.用时}</span>` : ''}
+                                ${dish.菜系 ? `<span class="tag tag-cuisine">${dish.菜系}</span>` : ''}
+                                ${targetLink}
+                            </div>
+                            <div class="tags-row">
+                                ${(dish.特色 || []).map(s => `<span class="tag tag-seasoning">${s}</span>`).join('')}
+                                ${(dish.味道 || []).map(t => `<span class="tag tag-taste">${t}</span>`).join('')}
+                            </div>
+                        </div>`;
+      } else {
+        card.innerHTML = `
+                        <div style="display:flex;justify-content: space-between;margin-bottom: 8px;">
+                            <div class="dish-name">
+                                ${this.createDishNameWithLinks(dish)}
+                            </div>
+                            ${targetLink}
+                        </div>
+                        <div class="tags-row">
+                            ${dish.用时 ? `<span class="tag tag-time">${dish.用时}</span>` : ''}
+                            ${dish.菜系 ? `<span class="tag tag-cuisine">${dish.菜系}</span>` : ''}
+                            ${(dish.特色 || []).map(s => `<span class="tag tag-seasoning">${s}</span>`).join('')}
+                            ${(dish.味道 || []).map(t => `<span class="tag tag-taste">${t}</span>`).join('')}
+                        </div>
+                    `;
+      }
+
+      return card;
+    }
+
+    createDishNameWithLinks(dish) {
+      if (!dish.链接) {
+        return dish.菜名;
+      }
+
+      const links = dish.链接;
+      const linkKeys = Object.keys(links);
+
+      if (linkKeys.length === 1) {
+        return `<a href="${links[linkKeys[0]]}" target="_blank">${dish.菜名}</a>`;
+      } else {
+        const selectId = `link-${Math.random().toString(36).substr(2, 9)}`;
+        return `
+                        <a href="${links[linkKeys[0]]}" target="_blank">${dish.菜名}</a>
+                    `;
+      }
+    }
+  }
+  function createFloatNav() {
+    const floatNav = document.getElementById('floatNav');
+    Object.keys(menuData).forEach((categoryName, index) => {
+      const link = document.createElement('a');
+      link.href = `#category-${categoryName}`;
+      link.text = categoryName;
+      floatNav.appendChild(link);
+    });
+  }
+  const app = new MenuApp();
+  createFloatNav();
+</script>
+</body>
+</html>
