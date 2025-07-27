@@ -13,9 +13,9 @@ base_url = "https://www.xiachufang.com"
 search_url = f"{base_url}/search/?keyword="
 
 def main():
-  prefix = "清炒"
+  prefix = "排骨炖"
   dishes = {
-    "香菇": "", "金针菇": "", "杏鲍菇": "", "茶树菇": "", "鸡枞菌": "", "木耳": ""
+    "海带":"","黄豆":"","苦瓜":"","陈皮":"","玉米":"","萝卜":"","花生":"","莲藕":"","山药":"",
   }
   for dish in dishes.keys():
     response = query_response(prefix + dish)
@@ -41,7 +41,7 @@ def query_response(dish, retry=0):
   except Exception as e:
     print(f"搜索菜谱 '{dish}' 第{retry}次时出错: {e}")
     if retry < 2:
-      time.sleep(0.5)
+      time.sleep(1)
       response = query_response(dish, retry=retry + 1)
   return response
 

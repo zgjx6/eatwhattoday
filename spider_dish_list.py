@@ -110,7 +110,7 @@ def query_response(dish, retry=0):
   except Exception as e:
     print(f"搜索菜谱 '{dish}' 第{retry}次时出错: {e}")
     if retry < 2:
-      time.sleep(0.5)
+      time.sleep(1)
       response = query_response(dish, retry=retry + 1)
   return response
 
@@ -128,25 +128,9 @@ def get_recipe_info(dish_list):
 
 
 if __name__ == "__main__":
-  my_dish_list = [{ "菜名": "麻婆豆腐", "菜系": "川菜", "特色": [], "味道": ["麻", "微辣"], "用时": "30m", "链接": { "麻婆豆腐": "https://www.xiachufang.com/recipe/78140/" }, "图片": "https://i2.chuimg.com/f8f10c40efea45099c416a2ed9123d4a_1864w_1242h.jpg" },
-                  { "菜名": "脆皮豆腐", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "脆皮豆腐": "https://www.xiachufang.com/recipe/104643213/" }, "图片": "https://i2.chuimg.com/e88fc12162e74eb38b1f4303d3205538_1078w_720h.jpg" },
-                  { "菜名": "家常豆腐", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "家常豆腐": "https://www.xiachufang.com/recipe/104337555/" }, "图片": "https://i2.chuimg.com/2cb78ce84e6e49d0842635d13191f783_600w_480h.jpg" },
-                  { "菜名": "金针菇豆腐煲", "菜系": "日料", "特色": [], "味道": [], "用时": "30m", "链接": { "金针菇豆腐煲": "https://www.xiachufang.com/recipe/105834401/" }, "图片": "https://i2.chuimg.com/6d4ec3f927ce42fdbe0f46d33b3db9ab_2560w_2560h.jpg" },
-                  { "菜名": "红烧豆腐", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "红烧豆腐": "https://www.xiachufang.com/recipe/102333700/" }, "图片": "https://i2.chuimg.com/195d38a2880211e6a9a10242ac110002_600w_400h.jpg" },
-                  { "菜名": "豆花/豆腐脑", "菜系": "川菜", "特色": [], "味道": [], "用时": "30m", "链接": { "豆花水煮牛肉": "https://www.xiachufang.com/recipe/106590753/", "咸豆腐脑": "", "甜豆腐脑": "" }, "图片": "https://i2.chuimg.com/64fe3d5a178b4c51a950797b3741da43_1080w_1920h.jpg" },
-                  { "菜名": "酿豆腐", "菜系": "客家菜", "特色": [], "味道": [], "用时": "30m", "链接": { "酿豆腐": "https://www.xiachufang.com/recipe/105998181/" }, "图片": "https://i2.chuimg.com/cd8dda9b2c8d4ac0960cfa82ce17035a_3024w_2268h.jpg" },
-                  { "菜名": "小葱拌豆腐", "菜系": "家常菜", "特色": [], "味道": [], "用时": "20m", "链接": { "小葱拌豆腐": "https://www.xiachufang.com/recipe/106151828/" }, "图片": "https://i2.chuimg.com/8cd29e0bc3e04fcfb653cce3079a879b_820w_1824h.jpg" },
-                  { "菜名": "豆腐蒸蛋", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "肉末豆腐蒸蛋": "https://www.xiachufang.com/recipe/104057101/", "虾仁豆腐蒸水蛋": "https://www.xiachufang.com/recipe/101858672/" }, "图片": "https://i2.chuimg.com/f6e3072534214f18a6bf35b1555968ec_1125w_831h.jpg" },
-                  { "菜名": "油豆腐/豆泡", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "油豆腐": "https://www.xiachufang.com/recipe/106104250/", "白菜焖豆泡": "https://www.xiachufang.com/recipe/106389253/", "肉末炒豆泡": "https://www.xiachufang.com/recipe/107467995/", "油豆泡塞肉": "https://www.xiachufang.com/recipe/104101699/" }, "图片": "https://i2.chuimg.com/c7fb26f96e964e9ea91c20cb975db229_1280w_960h.jpg" },
-                  { "菜名": "豆筋烧五花肉", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "豆筋烧五花肉": "https://www.xiachufang.com/recipe/30252/" }, "图片": "https://i2.chuimg.com/ba3b27fc86f411e6b87c0242ac110003_490w_732h.jpg" },
-                  { "菜名": "腐乳烧排骨", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "腐乳烧排骨": "https://www.xiachufang.com/recipe/267584/" }, "图片": "https://i2.chuimg.com/b7423282ac9411e6bc9d0242ac110002_1280w_853h.jpg" },
-                  { "菜名": "青椒豆腐干", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "青椒豆腐干": "https://www.xiachufang.com/recipe/100345725/" }, "图片": "https://i2.chuimg.com/9d24fe74885a11e6b87c0242ac110003_640w_640h.jpg" },
-                  { "菜名": "腐竹烧香菇", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "腐竹烧香菇": "https://www.xiachufang.com/recipe/102125564/" }, "图片": "https://i2.chuimg.com/18db9d597a67429f9e96d2bd923e5d6c_1500w_1124h.jpg" },
-                  { "菜名": "油焖千张", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "油焖千张": "https://www.xiachufang.com/recipe/106404239/" }, "图片": "https://i2.chuimg.com/3e14f15cca264706bb7a2e933705a4b9_534w_300h.gif" },
-                  { "菜名": "金针菇豆皮卷", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "金针菇豆皮卷": "https://www.xiachufang.com/recipe/104449303/" }, "图片": "https://i2.chuimg.com/fb8117b9567a4123b02d25ea179a9c88_3024w_4032h.jpg" },
-                  { "菜名": "红烧素鸡", "菜系": "家常菜", "特色": [], "味道": [], "用时": "30m", "链接": { "红烧素鸡": "https://www.xiachufang.com/recipe/104431785/" }, "图片": "https://i2.chuimg.com/7bc11b15a04047ca8811a3ea669d5942_1242w_1242h.jpg" },]
+  my_dish_list = [
+    { "菜名": "兰州牛肉面", "菜系": "", "用时": "", "价格": "", "特色": [], "味道": [], "链接": { }, "图片": "" },
+  ]
   info = get_recipe_info(my_dish_list)
-  print('[')
   for item in info:
     print(str(item).replace("'", '"'), end=',\n')
-  print(']')
