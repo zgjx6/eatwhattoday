@@ -28,7 +28,7 @@ def main():
           link_url = urljoin(base_url, a_tag['href'])
           dishes[dish] = link_url
     print(f"{dish}: {dishes[dish]}")
-  print(str(dishes).strip('{}'))
+  print(str(dishes).replace("'", '"').strip('{}'))
 
 
 def query_response(dish, retry=0):

@@ -148,5 +148,5 @@ if __name__ == "__main__":
   info = get_recipe_info(my_dish_list)
   print('[')
   for item in info:
-    print(item, end=',\n')
+    print(str(item).replace("'", '"'), end=',\n')
   print(']')
