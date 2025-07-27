@@ -1,4 +1,5 @@
 import os
+import time
 
 import requests
 from bs4 import BeautifulSoup
@@ -14,14 +15,14 @@ def analyze_dishes_with_qwen3(dishes: List[Dict]) -> List[Dict]:
   """批量分析菜肴信息"""
   dish_names = [dish["菜名"] for dish in dishes]
   prompt_template = """
-    请分析以下菜肴列表，并以严格的 JSON 格式返回结果，返回一个数组，每个元素包含字段：菜名、菜系、特色、味道、耗时、价格。
+    请分析以下菜肴列表，并以严格的 JSON 格式返回结果，返回一个数组，每个元素包含字段：菜名、菜系、特色、味道、用时、价格。
 
     要求：
     - 菜名：保持原菜名不变
     - 菜系：中国的八大菜系（如川菜、粤菜、鲁菜、苏菜、浙菜、闽菜、湘菜、徽菜）或其他地方知名菜系（如潮汕菜、客家菜等）、家常菜、国外菜系（如意大利菜、日本料理等），若无法判断则为空字符串。
     - 特色：指这道菜的独特烹饪方式或关键调料，如豆瓣酱、花雕酒、甜面酱、咖喱等，格式为数组，若无明显特色则为空数组。
-    - 味道：显著的味型，如微辣、麻、鲜、酱香、酸甜、咸香等，格式为数组，若无则为空数组。
-    - 耗时：预估制作时间，单位为分钟，格式为数字加'm'，例如 '30m'，若无法判断则为空字符串。
+    - 味道：显著的味型，如微辣、麻、鲜、酱香、酸甜等，格式为数组，若无则为空数组。
+    - 用时：预估制作时间，单位为分钟，格式为数字加'm'，例如 '30m'，若无法判断则为空字符串。
     - 价格：预估家庭制作成本（人民币），不用添加单位，例如 '25'，若无法判断则为空字符串。
 
     只返回一个 JSON 数组，每道菜的数据为数组中的一个map，返回结果的顺序需要与输入的顺序一致，不要任何额外说明。
@@ -35,6 +36,7 @@ def analyze_dishes_with_qwen3(dishes: List[Dict]) -> List[Dict]:
     response = dashscope.Generation.call(model='qwen-plus', prompt=prompt, temperature=0.3, top_p=0.8, result_format='message')
     if response.status_code == 200:
       content = response.output.choices[0].message.content.strip()
+      print(f"{dish_names} 的分析结果：{content}")
       try:
         start = content.find('[')
         end = content.rfind(']')
@@ -51,7 +53,7 @@ def analyze_dishes_with_qwen3(dishes: List[Dict]) -> List[Dict]:
               "菜系": analysis_result.get("菜系", "").strip(),
               "特色": analysis_result.get("特色", []),
               "味道": analysis_result.get("味道", []),
-              "耗时": analysis_result.get("耗时", ""),
+              "用时": analysis_result.get("用时", ""),
               "价格": analysis_result.get("价格", "")
             })
           results.append(dish)
@@ -71,8 +73,8 @@ def analyze_dishes_with_qwen3(dishes: List[Dict]) -> List[Dict]:
       results.append(dish)
   return results
 
-def search_recipe_links_and_image(dish, headers):
-    """搜索菜谱链接和图片"""
+def search_recipe_links_and_image(dish):
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
     base_url = "https://www.xiachufang.com"
     search_url = f"{base_url}/search/?keyword="
 
@@ -86,6 +88,7 @@ def search_recipe_links_and_image(dish, headers):
       try:
         url = search_url + keyword
         response = requests.get(url, headers=headers, timeout=10)
+        time.sleep(1)
         response.raise_for_status()
         response.encoding = response.apparent_encoding
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -105,6 +108,7 @@ def search_recipe_links_and_image(dish, headers):
                   image_url = data_src.split('?')[0]
 
         updated_links[keyword] = link_url
+        print(f"{keyword} 搜索完成：{link_url}")
       except Exception as e:
         print(f"搜索菜谱 '{keyword}' 时出错: {e}")
         updated_links[keyword] = ""
@@ -113,14 +117,12 @@ def search_recipe_links_and_image(dish, headers):
 
 
 def get_recipe_info(dish_list):
-  headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
-
   # 第一步：批量分析所有菜肴
   analyzed_dishes = analyze_dishes_with_qwen3(dish_list)
 
   # 第二步：为每道菜搜索链接和图片
   for dish in analyzed_dishes:
-    links, image = search_recipe_links_and_image(dish, headers)
+    links, image = search_recipe_links_and_image(dish)
     dish["链接"] = links
     dish["图片"] = image
 
@@ -128,10 +130,9 @@ def get_recipe_info(dish_list):
 
 
 if __name__ == "__main__":
-  dish_list = [
-    {"菜名": "可乐鸡翅", "菜系": "", "特色": [], "味道": [], "耗时": "", "链接": {"": ""}, "图片": ""},
-    {"菜名": "回锅肉", "菜系": "", "特色": [], "味道": [], "耗时": "", "链接": {"蒜苗回锅肉": "", "青椒回锅肉": ""}, "图片": ""}
-  ]
-  info = get_recipe_info(dish_list)
+  my_dish_list = []
+  info = get_recipe_info(my_dish_list)
+  print('[')
   for item in info:
     print(item)
+  print(']')
