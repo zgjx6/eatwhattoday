@@ -89,7 +89,7 @@ def search_recipe_links_and_image(dish):
       if recipe_div:
         a_tag = recipe_div.find('a')
         if a_tag and a_tag.get('href'):
-          updated_links[keyword] = urljoin(base_url, a_tag['href'])
+          updated_links[keyword] = urljoin(base_url, a_tag['href']).split('?')[0]
           if i == 0 and not image_url:
             cover_div = a_tag.find('div', class_='cover')
             if cover_div:

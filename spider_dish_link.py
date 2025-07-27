@@ -25,7 +25,7 @@ def main():
       if recipe_div:
         a_tag = recipe_div.find('a')
         if a_tag and a_tag.get('href'):
-          link_url = urljoin(base_url, a_tag['href'])
+          link_url = urljoin(base_url, a_tag['href']).split('?')[0]
           dishes[dish] = link_url
     print(f"{dish}: {dishes[dish]}")
   print(str(dishes).replace("'", '"').strip('{}'))
