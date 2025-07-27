@@ -183,7 +183,7 @@
     }
 
     .dish-card:hover {
-      transform: scale(1.05);
+      transform: scale(1.02);
       box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
     }
 
@@ -193,8 +193,8 @@
     }
 
     .dish-image {
-      width: 165px;
-      height: 165px;
+      width: 150px;
+      height: 150px;
       position: relative;
       flex-shrink: 0;
     }
@@ -223,7 +223,7 @@
       padding: 15px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 6px;
       justify-content: space-between;
       align-items: flex-start;
     }
@@ -254,7 +254,7 @@
     }
 
     .tag {
-      padding: 4px 8px;
+      padding: 3px 8px;
       border-radius: 12px;
       font-size: 11px;
       font-weight: 500;
@@ -1721,7 +1721,7 @@
       const links = dish.链接;
       const linkKeys = Object.keys(links);
       let targetLink = ""
-      if (linkKeys.length !== 1) {
+      if (linkKeys.length > 1) {
         const selectId = `link-${Math.random().toString(36).substr(2, 9)}`;
         targetLink = `<select class="link-dropdown" id="${selectId}" onchange="if (this.value) { window.open(this.value, '_blank') }">
                             ${linkKeys.map((key, index) => `<option value="${links[key]}" ${index === 0 ? "selected" : ""}>${key}</option>`).join('')}
