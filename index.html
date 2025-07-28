@@ -12,44 +12,36 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Arial', sans-serif;
       line-height: 1.6;
       transition: all 0.3s ease;
     }
-
     .container {
       width: 90%;
       margin: 0 auto;
       padding: 20px;
     }
-
     .theme-modern {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #333;
     }
-
     .theme-classic {
       background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
       color: #333;
     }
-
     .theme-dark {
       background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
       color: #ecf0f1;
     }
-
     .theme-elegant {
       background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
       color: #5d4037;
     }
-
     .theme-nature {
       background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
       color: #2e7d32;
     }
-
     .header {
       display: flex;
       justify-content: space-between;
@@ -61,7 +53,6 @@
       border-radius: 15px;
       box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
     }
-
     .logo {
       margin: 0 auto;
       font-size: 2.5rem;
@@ -69,7 +60,6 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       padding-left: 78px;
     }
-
     .theme-selector {
       position: relative;
       margin-left: 10px;
@@ -77,13 +67,11 @@
       align-items: center;
       color: #333;
     }
-
     select {
       outline: none;
       border: none;
       cursor: pointer;
     }
-
     .link-dropdown {
       border-radius: 8px;
       background-color: rgba(255, 255, 255, 0.2);
@@ -91,8 +79,8 @@
       font-size: 11px;
       color: #333;
       transition: all 0.3s ease;
+      min-height: 24px;
     }
-
     .dropdown {
       padding: 10px 15px;
       border: none;
@@ -103,7 +91,6 @@
       font-size: 14px;
       backdrop-filter: blur(5px);
     }
-
     .filters {
       display: flex;
       flex-wrap: wrap;
@@ -115,20 +102,17 @@
       border-radius: 15px;
       box-shadow: 0 4px 16px rgba(31, 38, 135, 0.2);
     }
-
     .filter-group {
       display: flex;
       flex-direction: row;
       gap: 8px;
       align-items: center;
     }
-
     .filter-label {
       font-weight: bold;
       font-size: 1.1em;
       color: #333;
     }
-
     .search-input {
       padding: 10px 15px;
       border: none;
@@ -139,17 +123,14 @@
       min-width: 200px;
       backdrop-filter: blur(5px);
     }
-
     .search-input::placeholder {
       color: rgba(255, 255, 255, 0.7);
     }
-
     .checkbox-group {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
-
     .checkbox-item {
       display: flex;
       align-items: center;
@@ -160,22 +141,18 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
-
     .checkbox-item:hover {
       background: rgba(255, 255, 255, 0.2);
     }
-
     .checkbox-item input {
       margin: 0;
     }
-
     .dishes-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
       gap: 15px;
       margin-bottom: 30px;
     }
-
     .dish-card {
       display: flex;
       width: 400px;
@@ -186,30 +163,25 @@
       box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     .dish-card:hover {
       transform: scale(1.02);
       box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
     }
-
     .dish-card.no-image {
       flex-direction: column;
       padding: 15px;
     }
-
     .dish-image {
       width: 150px;
       height: 150px;
       position: relative;
       flex-shrink: 0;
     }
-
     .dish-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
     .price-tag {
       position: absolute;
       top: 10px;
@@ -222,7 +194,6 @@
       font-weight: bold;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
-
     .dish-info {
       flex: 1;
       padding: 15px;
@@ -235,10 +206,8 @@
     .dish-info-noimg {
       display:flex;
       justify-content: space-between;
-      margin-bottom: 8px;
       padding-right: 20px;
     }
-
     .dish-name {
       font-size: 1.2rem;
       font-weight: bold;
@@ -247,7 +216,6 @@
       justify-content: space-between;
       gap: 10px;
     }
-
     .dish-name > a {
       color: #111;
       text-decoration: initial;
@@ -256,15 +224,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
     .tags-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;
       gap: 8px;
-      min-height: 24px;
     }
-
     .tag {
       padding: 3px 8px;
       border-radius: 12px;
@@ -273,19 +238,15 @@
       color: white;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
-
     .tag-time {
       background: #9b59b6;
     }
-
     .tag-cuisine {
       background: #e74c3c;
     }
-
     .tag-seasoning {
       background: #f39c12;
     }
-
     .tag-taste {
       background: #27ae60;
     }
