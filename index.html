@@ -113,6 +113,9 @@
       font-size: 1.1em;
       color: #333;
     }
+    input {
+      outline: none;
+    }
     .search-input {
       padding: 10px 15px;
       border: none;
@@ -624,7 +627,7 @@
 
     <div class="filter-group">
       <label class="filter-label">搜索菜名</label>
-      <input type="text" class="search-input" id="searchInput" placeholder="输入菜名搜索...">
+      <input type="search" class="search-input" id="searchInput" placeholder="输入菜名搜索..." autocomplete="on" clear>
     </div>
   </div>
   <div class="random-food-area">
