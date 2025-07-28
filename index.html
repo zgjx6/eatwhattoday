@@ -631,7 +631,7 @@
     </div>
   </div>
   <div class="random-food-area">
-    <button id="choose-random-food">随机点菜</button>
+    <button id="choose-random-food">点菜</button>
   </div>
   <div class="random-food-area" id="random-food"></div>
   <main id="menuContent"></main>
@@ -1957,7 +1957,7 @@
     }
 
     createDishNameWithLinks(dish) {
-      if (!dish.链接) {
+      if (!dish.链接 || Object.keys(dish.链接).length === 0) {
         return dish.菜名;
       }
       const links = dish.链接;
