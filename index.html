@@ -1846,7 +1846,7 @@
           return false;
         }
       }
-      if (this.filters.search && !dish.菜名.toLowerCase().includes(this.filters.search)) {
+      if (this.filters.search && !dish.菜名.toLowerCase().includes(this.filters.search) && !Object.keys(dish.链接).some(key => key.includes(this.filters.search))) {
         return false;
       }
       return true;
