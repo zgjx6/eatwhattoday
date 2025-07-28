@@ -72,6 +72,10 @@
 
     .theme-selector {
       position: relative;
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+      color: #333;
     }
 
     select {
@@ -365,12 +369,14 @@
 
     #choose-random-food {
       border-radius: 100%;
-      height: 70px;
-      width: 70px;
+      height: 100px;
+      width: 100px;
       margin-left: 20px;
       background-color: #aa96da;
       cursor: pointer;
       border: none;
+      font-size: 1.2em;
+      font-weight: bold;
     }
 
     #choose-random-food:active {
@@ -380,7 +386,7 @@
     .random-food-area {
       display: flex;
       justify-content: center;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
     .theme-dark .dropdown,
@@ -407,6 +413,51 @@
       color: white;
       text-decoration: none;
       font-size: 0.5em;
+    }
+    label {
+      width: 100px;
+      display: inline-block;
+      text-align: right;
+      font-size: 14px;
+      color: #495060;
+      padding: 10px 12px 10px 0;
+    }
+    label:empty {
+      width: 0;
+    }
+    [type='checkbox'] {
+      display: none;
+    }
+    .switch {
+      width: 40px;
+      height: 20px;
+      background: #F1F1F1;
+      display: inline-block;
+      border-radius: 20px;
+      transition: background 0.4s;
+      padding: 0;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+    .switch > .ball {
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 16px;
+      background: #E9E9E9;
+      border: 2px solid #d5d0d0;
+      transition: all 0.4s;
+      box-sizing: content-box;
+    }
+    [type='checkbox']:checked + label {
+      background: #2d8cf0;
+    }
+    [type='checkbox']:checked + label > .ball {
+      margin-left: 20px;
+    }
+    [type='checkbox']:active + label > .ball  {
+      width: 30px;
+      margin-left: 10px;
     }
 
     ::-webkit-scrollbar {
@@ -447,6 +498,10 @@
   <header class="header">
     <div class="logo">今天吃什么</div>
     <div class="theme-selector">
+      <span style="margin-right: 5px;font-size: 0.9em;">无图模式</span>
+      <input type="checkbox" name="noImg" id="noImg"/><label class="switch" for="noImg"><span class="ball"></span></label>
+    </div>
+    <div class="theme-selector">
       <select class="dropdown" id="themeSelector">
         <option value="theme-modern">现代</option>
         <option value="theme-classic">经典</option>
@@ -471,12 +526,12 @@
       </select>
     </div>
 
-    <div class="filter-group">
-      <label class="filter-label">去掉特色</label>
+    <div class="filter-group" style="display: none">
+      <label class="filter-label">特色</label>
       <div class="checkbox-group" id="seasoningFilters"></div>
     </div>
 
-    <div class="filter-group">
+    <div class="filter-group" style="display: none">
       <label class="filter-label">味道</label>
       <div class="checkbox-group" id="tasteFilters"></div>
     </div>
@@ -487,7 +542,7 @@
     </div>
   </div>
   <div class="random-food-area">
-    <button id="choose-random-food">每日一菜</button>
+    <button id="choose-random-food">随机点菜</button>
   </div>
   <div class="random-food-area" id="random-food"></div>
   <main id="menuContent"></main>
@@ -497,7 +552,6 @@
 <script>
   const menuData = {
     "热菜": {
-
       "炒菜(荤)": [
         {"菜名": "回锅肉", "菜系": "川菜", "用时": "30m", "价格": "25", "特色": ["豆瓣酱", "蒜苗"], "味道": ["微辣"], "链接": {"蒜苗回锅肉": "https://www.xiachufang.com/recipe/106588436/", "青椒回锅肉": "https://www.xiachufang.com/recipe/104592125/", "莲白回锅肉": "https://www.xiachufang.com/recipe/102877532/", "香干回锅肉": "https://www.xiachufang.com/recipe/1073651/", "苕皮回锅肉": "https://www.xiachufang.com/recipe/100105108/", "土豆片回锅肉": "https://www.xiachufang.com/recipe/100138503/", "蒜薹回锅肉": "https://www.xiachufang.com/recipe/159732/", "干豇豆回锅肉": "https://www.xiachufang.com/recipe/100277720/", "胡萝卜回锅肉": "https://www.xiachufang.com/recipe/1093909/", "老咸菜回锅肉": "https://www.xiachufang.com/recipe/103733103/", "洋葱回锅肉": "https://www.xiachufang.com/recipe/1056487/"}, "图片": "https://i2.chuimg.com/25f667a286f711e6a9a10242ac110002_450w_678h.jpg"},
         {"菜名": "青椒/蒜苔/土豆等炒肉丝", "菜系": "家常菜", "用时": "15m", "价格": "15", "特色": [], "味道": [], "链接": {"青椒肉丝": "https://www.xiachufang.com/recipe/106022067/", "蒜薹肉丝": "https://www.xiachufang.com/recipe/1070778/", "土豆肉丝": "https://www.xiachufang.com/recipe/157932/", "莴笋肉丝": "https://www.xiachufang.com/recipe/107200335/", "芹菜肉丝": "https://www.xiachufang.com/recipe/100430631/", "榨菜肉丝": "https://www.xiachufang.com/recipe/102258070/", "韭黄肉丝": "https://www.xiachufang.com/recipe/104212961/", "豆角肉丝": "https://www.xiachufang.com/recipe/100381184/", "胡萝卜肉丝": "https://www.xiachufang.com/recipe/246080/", "泡椒肉丝": "https://www.xiachufang.com/recipe/100127394/", "木须肉": "https://www.xiachufang.com/recipe/267863/", "木耳肉丝": "https://www.xiachufang.com/recipe/100397684/", "豆干肉丝": "https://www.xiachufang.com/recipe/104456265/"}, "图片": "https://i2.chuimg.com/69c86589720a4d0f8d81a584c552404e_1080w_1303h.jpg", "雪菜肉丝": "https://www.xiachufang.com/recipe/107353085/", "苦瓜炒肉": "https://www.xiachufang.com/recipe/1051411/"},
@@ -1519,7 +1573,8 @@
         cuisine: '',
         seasonings: [],
         tastes: [],
-        search: ''
+        search: '',
+        noImg: false
       };
       this.allFilteredDishes = [];
       this.init();
@@ -1528,8 +1583,8 @@
     init() {
       this.setupThemeSelector();
       this.setupFilters();
-      this.renderMenu();
       this.setupEventListeners();
+      this.renderMenu();
     }
 
     setupThemeSelector() {
@@ -1548,8 +1603,8 @@
     setupFilters() {
       this.populateCuisineFilter();
       this.populateFoodTypeFilter();
-      this.populateSeasoningFilters();
-      this.populateTasteFilters();
+      // this.populateSeasoningFilters();
+      // this.populateTasteFilters();
     }
 
     getAllUniqueValues(key) {
@@ -1639,6 +1694,10 @@
         this.filters.search = e.target.value.toLowerCase();
         this.renderMenu();
       });
+      document.getElementById('noImg').addEventListener('input', (e) => {
+        this.filters.noImg = e.target.checked;
+        this.renderMenu();
+      });
       const randomFoodContainer = document.getElementById('random-food');
       let chooseRandomFood = document.getElementById('choose-random-food');
       chooseRandomFood.addEventListener('click', (e) => {
@@ -1652,7 +1711,6 @@
         randomFoodContainer.innerHTML = '';
         randomFoodContainer.appendChild(dishCard);
       });
-      chooseRandomFood.click();
     }
 
     updateCheckboxFilter(filterType, value, checked) {
@@ -1733,12 +1791,13 @@
           }
         }
       });
+      document.getElementById('choose-random-food').click();
     }
 
     createDishCard(dish) {
       const card = document.createElement('div');
       const hasImage = dish.图片;
-      card.className = `dish-card ${hasImage ? '' : 'no-image'}`;
+      card.className = `dish-card ${hasImage && !this.filters.noImg ? '' : 'no-image'}`;
       const links = dish.链接;
       const linkKeys = Object.keys(links);
       let targetLink = ""
@@ -1748,7 +1807,7 @@
                             ${linkKeys.map((key, index) => `<option value="${links[key]}" ${index === 0 ? "selected" : ""}>${key}</option>`).join('')}
                         </select>`;
       }
-      if (hasImage) {
+      if (hasImage && !this.filters.noImg) {
         card.innerHTML = `<div class="dish-image">
                             <img src="${dish.图片}" alt="${dish.菜名}" onerror="this.parentElement.style.display='none'">
                             ${dish.价格 ? `<div class="price-tag">¥${dish.价格}</div>` : ''}
