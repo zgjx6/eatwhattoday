@@ -118,14 +118,15 @@
 
     .filter-group {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 8px;
+      align-items: center;
     }
 
     .filter-label {
       font-weight: bold;
-      font-size: 14px;
-      opacity: 0.9;
+      font-size: 1.1em;
+      color: #333;
     }
 
     .search-input {
@@ -231,6 +232,12 @@
       justify-content: space-between;
       align-items: flex-start;
     }
+    .dish-info-noimg {
+      display:flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      padding-right: 20px;
+    }
 
     .dish-name {
       font-size: 1.2rem;
@@ -255,6 +262,7 @@
       flex-wrap: wrap;
       justify-content: flex-start;
       gap: 8px;
+      min-height: 24px;
     }
 
     .tag {
@@ -341,11 +349,6 @@
       font-size: 3rem;
       transition: transform 0.3s ease;
     }
-
-    .category-title:hover {
-      transform: scale(1.2);
-    }
-
     .subcategory-title {
       font-size: 1.8rem;
       margin: 0 0 20px 0;
@@ -420,7 +423,7 @@
       text-align: right;
       font-size: 14px;
       color: #495060;
-      padding: 10px 12px 10px 0;
+      padding: 2px 12px 2px 0;
     }
     label:empty {
       width: 0;
@@ -460,6 +463,128 @@
       margin-left: 10px;
     }
 
+    .add-button {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 25px;
+      height: 25px;
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+    }
+    .add-button:hover {
+      background-color: #45a049;
+    }
+    .cart-container {
+      position: fixed;
+      bottom: 20px;
+      right: 10px;
+      z-index: 1000;
+    }
+    .cart-icon-btn {
+      width: 60px;
+      height: 60px;
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+    .cart-icon-btn:hover {
+      background-color: #e68900;
+    }
+    .cart-panel {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      width: 300px;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-height: 400px;
+      overflow-y: auto;
+      display: none; /* 默认隐藏 */
+    }
+    .cart-panel-header {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cart-items {
+      padding: 10px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px solid #f9f9f9;
+    }
+    .cart-item-info {
+      display: flex;
+      align-items: center;
+    }
+    .cart-item-name {
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .cart-item-price {
+      font-size: 13px;
+      color: #666;
+      margin-left: 10px;
+    }
+    .delete-btn {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 1px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .delete-btn:hover {
+      background-color: #d32f2f;
+    }
+    .cart-summary {
+      padding: 10px;
+      border-top: 1px solid #eee;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+    }
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: #ff0000;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     ::-webkit-scrollbar {
       width: 4px;
       opacity: 1;
@@ -516,13 +641,13 @@
     <div class="filter-group">
       <label class="filter-label">类别</label>
       <select class="dropdown" id="foodTypeFilter">
-        <option value="">全部类别</option>
+        <option value="">全部</option>
       </select>
     </div>
     <div class="filter-group">
       <label class="filter-label">菜系</label>
       <select class="dropdown" id="cuisineFilter">
-        <option value="">全部菜系</option>
+        <option value="">全部</option>
       </select>
     </div>
 
@@ -547,6 +672,27 @@
   <div class="random-food-area" id="random-food"></div>
   <main id="menuContent"></main>
   <div class="float-nav" id="floatNav"></div>
+  <!-- 购物车区域 -->
+  <div class="cart-container">
+    <button class="cart-icon-btn" id="cartIconBtn">
+      🛒
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <div class="cart-panel" id="cartPanel">
+      <div class="cart-panel-header">
+        <span>购物车</span>
+        <button class="delete-btn" id="clearCartBtn" title="清空购物车">清空</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <!-- 购物车项目将动态插入这里 -->
+      </div>
+      <div class="cart-summary" id="cartSummary">
+        <!-- 总计信息将动态插入这里 -->
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -1825,10 +1971,10 @@
                                 ${(dish.特色 || []).map(s => `<span class="tag tag-seasoning">${s}</span>`).join('')}
                                 ${(dish.味道 || []).map(t => `<span class="tag tag-taste">${t}</span>`).join('')}
                             </div>
-                        </div>`;
+                        </div>
+                        <button class="add-button" data-dish='${JSON.stringify({"菜名": dish.菜名, "价格": dish.价格})}'>+</button>`;
       } else {
-        card.innerHTML = `
-                        <div style="display:flex;justify-content: space-between;margin-bottom: 8px;">
+        card.innerHTML = `<div class="dish-info-noimg">
                             <div class="dish-name">
                                 ${this.createDishNameWithLinks(dish)}
                             </div>
@@ -1840,7 +1986,7 @@
                             ${(dish.特色 || []).map(s => `<span class="tag tag-seasoning">${s}</span>`).join('')}
                             ${(dish.味道 || []).map(t => `<span class="tag tag-taste">${t}</span>`).join('')}
                         </div>
-                    `;
+                        <button class="add-button" data-dish='${JSON.stringify({"菜名": dish.菜名, "价格": dish.价格})}'>+</button>`;
       }
 
       return card;
@@ -1879,8 +2025,115 @@
       });
     });
   }
+
+  // 购物车数据结构
+  let cart = [];
+  const CART_STORAGE_KEY = 'dish_cart';
+  const dishContainer = document.getElementById('dishContainer');
+  const cartIconBtn = document.getElementById('cartIconBtn');
+  const clearCartBtn = document.getElementById('clearCartBtn');
+  const cartPanel = document.getElementById('cartPanel');
+  const cartItems = document.getElementById('cartItems');
+  const cartSummary = document.getElementById('cartSummary');
+  const cartCount = document.getElementById('cartCount');
+  function loadCartFromStorage() {
+    const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+    if (storedCart) {
+      try {
+        cart = JSON.parse(storedCart);
+        updateCartDisplay();
+      } catch (e) {
+        cart = [];
+      }
+    }
+  }
+  function saveCartToStorage() {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  }
+  function updateCartDisplay() {
+    cartItems.innerHTML = '';
+    if (cart.length === 0) {
+      cartItems.innerHTML = '<p style="text-align:center; color:#888;">购物车为空</p>';
+      cartSummary.innerHTML = '<span>总计: 0 项</span><span>¥0.00</span>';
+    } else {
+      let totalItems = 0;
+      let totalPrice = 0;
+      cart.forEach((item, index) => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'cart-item';
+        const priceNum = parseFloat(item.价格) || 0;
+        totalItems += 1;
+        totalPrice += priceNum;
+        itemElement.innerHTML = `
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.菜名}</div>
+                            <div class="cart-item-price">¥${priceNum.toFixed(2)}</div>
+                        </div>
+                        <button class="delete-btn" data-index="${index}">删除</button>
+                    `;
+        cartItems.appendChild(itemElement);
+      });
+      cartSummary.innerHTML = `<span>总计: ${totalItems} 项</span><span>¥${totalPrice.toFixed(2)}</span>`;
+    }
+    const count = cart.length;
+    cartCount.textContent = count;
+    cartCount.style.display = count > 0 ? 'flex' : 'none';
+  }
+  function addToCart(dish) {
+    for (let i of cart) {
+      if (i.菜名 === dish.菜名) {
+        return
+      }
+    }
+    cart.push({...dish});
+    saveCartToStorage();
+    updateCartDisplay();
+  }
+  function removeFromCart(index) {
+    if (index >= 0 && index < cart.length) {
+      cart.splice(index, 1);
+      saveCartToStorage();
+      updateCartDisplay();
+    }
+  }
+  function clearCart() {
+    cart = [];
+    localStorage.removeItem(CART_STORAGE_KEY);
+    updateCartDisplay();
+  }
   const app = new MenuApp();
   createFloatNav();
+  loadCartFromStorage();
+  cartIconBtn.addEventListener('click', () => {
+    if (cartPanel.style.display === 'block') {
+      cartPanel.style.display = 'none';
+    } else {
+      updateCartDisplay();
+      cartPanel.style.display = 'block';
+      clearCartBtn.style.display = 'flex';
+    }
+  });
+  clearCartBtn.addEventListener('click', clearCart);
+  cartItems.addEventListener('click', (event) => {
+    if (event.target.classList.contains('delete-btn')) {
+      const index = parseInt(event.target.getAttribute('data-index'));
+      removeFromCart(index);
+    }
+  });
+  document.addEventListener('click', (event) => {
+    if (!cartPanel.contains(event.target) && event.target !== cartIconBtn && !event.target.classList.contains('delete-btn')) {
+      cartPanel.style.display = 'none';
+      clearCartBtn.style.display = 'none';
+    }
+  });
+  document.querySelectorAll('.add-button').forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const dishData = JSON.parse(button.getAttribute('data-dish'));
+      addToCart(dishData);
+    });
+  });
+
 </script>
 </body>
 </html>
