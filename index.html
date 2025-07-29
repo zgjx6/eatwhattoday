@@ -23,7 +23,7 @@
       padding: 20px;
     }
     .theme-modern {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #667eea 0%, #667eea 100%);
       color: #333;
     }
     .theme-classic {
@@ -185,18 +185,6 @@
       height: 100%;
       object-fit: cover;
     }
-    .price-tag {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #ff6b6b;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 15px;
-      font-size: 11px;
-      font-weight: bold;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
     .dish-info {
       flex: 1;
       padding: 15px;
@@ -222,7 +210,7 @@
     .dish-name > a {
       color: #111;
       text-decoration: initial;
-      width: 220px;
+      max-width: 220px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -242,16 +230,16 @@
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
     .tag-time {
-      background: #9b59b6;
+      background-color: #9b59b6;
     }
     .tag-cuisine {
-      background: #e74c3c;
+      background-color: #e74c3c;
     }
     .tag-seasoning {
-      background: #f39c12;
+      background-color: #f39c12;
     }
     .tag-taste {
-      background: #27ae60;
+      background-color: #27ae60;
     }
     @media (max-width: 3840px) {
       .container {
@@ -491,7 +479,7 @@
       font-weight: bold;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: baseline;
     }
     .cart-items {
       padding: 10px;
@@ -548,6 +536,26 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 30px;
+      background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+      color: #364f6b;
+      font-weight: bold;
+      border: 1px solid #a0e9ff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      font-size: 14px;
+      z-index: 9999;
+      animation: fade 3s forwards;
+    }
+    @keyframes fade {
+      0%   { opacity: 1; }
+      80%  { opacity: 1; }
+      100% { opacity: 0; }
     }
     ::-webkit-scrollbar {
       width: 4px;
@@ -645,7 +653,10 @@
 
     <div class="cart-panel" id="cartPanel">
       <div class="cart-panel-header">
-        <span>购物车</span>
+        <div style="gap: 10px;display: flex;justify-content: space-between; align-items: baseline;">
+          <div>购物车</div>
+          <button class="delete-btn" id="copyCartBtn" style="background-color: #27ae60;" title="复制购物车">复制</button>
+        </div>
         <button class="delete-btn" id="clearCartBtn" title="清空购物车">清空</button>
       </div>
       <div class="cart-items" id="cartItems">
@@ -1919,7 +1930,7 @@
       }
       if (hasImage && !this.filters.noImg) {
         card.innerHTML = `<div class="dish-image">
-                            <img src="${dish.图片}" alt="${dish.菜名}" onerror="this.parentElement.style.display='none'">
+                            <img loading="lazy" src="${dish.图片}" alt="${dish.菜名}" onerror="this.parentElement.style.display='none'">
                             ${dish.价格 ? `<div class="price-tag">¥${dish.价格}</div>` : ''}
                         </div>
                         <div class="dish-info">
@@ -1996,6 +2007,7 @@
   const dishContainer = document.getElementById('dishContainer');
   const cartIconBtn = document.getElementById('cartIconBtn');
   const clearCartBtn = document.getElementById('clearCartBtn');
+  const copyCartBtn = document.getElementById('copyCartBtn');
   const cartPanel = document.getElementById('cartPanel');
   const cartItems = document.getElementById('cartItems');
   const cartSummary = document.getElementById('cartSummary');
@@ -2005,11 +2017,11 @@
     if (storedCart) {
       try {
         cart = JSON.parse(storedCart);
-        updateCartDisplay();
       } catch (e) {
         cart = [];
       }
     }
+    updateCartDisplay();
   }
   function saveCartToStorage() {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
@@ -2028,13 +2040,11 @@
         const priceNum = parseFloat(item.价格) || 0;
         totalItems += 1;
         totalPrice += priceNum;
-        itemElement.innerHTML = `
-                        <div class="cart-item-info">
+        itemElement.innerHTML = `<div class="cart-item-info">
                             <div class="cart-item-name">${item.菜名}</div>
                             <div class="cart-item-price">¥${priceNum.toFixed(2)}</div>
                         </div>
-                        <button class="delete-btn" data-index="${index}">删除</button>
-                    `;
+                        <button class="delete-btn" data-index="${index}">删除</button>`;
         cartItems.appendChild(itemElement);
       });
       cartSummary.innerHTML = `<span>总计: ${totalItems} 项</span><span>¥${totalPrice.toFixed(2)}</span>`;
@@ -2065,6 +2075,58 @@
     localStorage.removeItem(CART_STORAGE_KEY);
     updateCartDisplay();
   }
+  async function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise((resolve, reject) => {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      let success = false;
+      try {
+        success = document.execCommand('copy');
+      } catch (err) {
+      }
+      document.body.removeChild(textarea);
+      if (success) {
+        resolve();
+      } else {
+        const range = document.createRange();
+        const selection = window.getSelection();
+        const span = document.createElement('span');
+        span.textContent = text;
+        span.style.position = 'fixed';
+        span.style.opacity = '0';
+        document.body.appendChild(span);
+        range.selectNode(span);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        try {
+          success = document.execCommand('copy');
+        } catch (_) {
+        }
+        selection.removeAllRanges();
+        document.body.removeChild(span);
+        if (success) {
+          resolve();
+        } else {
+          reject(new Error('无法复制到剪贴板'));
+        }
+      }
+    });
+  }
+  function toast(msg) {
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 5000);
+  }
   const app = new MenuApp();
   createFloatNav();
   loadCartFromStorage();
@@ -2078,6 +2140,13 @@
     }
   });
   clearCartBtn.addEventListener('click', clearCart);
+  copyCartBtn.addEventListener('click', (event) => {
+    if (cart && cart.length > 0) {
+      copyToClipboard(cart.map(item => item['菜名']).join('\n')).then(() => toast('已复制')).catch(err => toast(err.message));;
+    } else {
+      toast('购物车为空');
+    }
+  });
   cartItems.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-btn')) {
       const index = parseInt(event.target.getAttribute('data-index'));
