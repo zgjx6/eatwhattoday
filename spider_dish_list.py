@@ -95,7 +95,7 @@ def search_recipe_links_and_image(dish):
             if cover_div:
               img_tag = cover_div.find('img')
               if img_tag and img_tag.get('data-src'):
-                image_url = img_tag['data-src'].split('?')[0]
+                image_url = img_tag['data-src'].split('?')[0] + "${img_param}"
       print(f"{keyword} 搜索完成：{updated_links[keyword]}")
     return updated_links, image_url
 
@@ -133,4 +133,5 @@ if __name__ == "__main__":
   ]
   info = get_recipe_info(my_dish_list)
   for item in info:
-    print(str(item).replace("'", '"'), end=',\n')
+    print(str(item).replace("'", '"').replace('"https://i2.chuimg.com/', "`${img_host}").replace('${img_param}"', '${img_param}`'), end=',\n')
+
