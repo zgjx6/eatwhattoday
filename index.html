@@ -2060,7 +2060,7 @@
                                 ${(dish.味道 || []).map(t => `<span class="tag tag-taste">${t}</span>`).join('')}
                             </div>
                         </div>
-                        <button class="add-button" data-dish='${JSON.stringify({"菜名": dish.菜名, "价格": dish.价格})}'>+</button>`;
+                        <button class="add-button" onclick="addToCart('${dish.菜名}', '${dish.价格}')">+</button>`;
       } else {
         card.innerHTML = `<div class="dish-info-noimg">
                             <div class="dish-name">
@@ -2074,7 +2074,7 @@
                             ${(dish.特色 || []).map(s => `<span class="tag tag-seasoning">${s}</span>`).join('')}
                             ${(dish.味道 || []).map(t => `<span class="tag tag-taste">${t}</span>`).join('')}
                         </div>
-                        <button class="add-button" data-dish='${JSON.stringify({"菜名": dish.菜名, "价格": dish.价格})}'>+</button>`;
+                        <button class="add-button" onclick="addToCart('${dish.菜名}', '${dish.价格}')">+</button>`;
       }
 
       return card;
@@ -2166,13 +2166,13 @@
     cartCount.textContent = count;
     cartCount.style.display = count > 0 ? 'flex' : 'none';
   }
-  function addToCart(dish) {
+  function addToCart(dish_name, dish_price) {
     for (let i of cart) {
-      if (i.菜名 === dish.菜名) {
+      if (i.菜名 === dish_name) {
         return
       }
     }
-    cart.push({...dish});
+    cart.push({"菜名": dish_name, "价格": dish_price});
     saveCartToStorage();
     updateCartDisplay();
   }
@@ -2255,7 +2255,8 @@
   clearCartBtn.addEventListener('click', clearCart);
   copyCartBtn.addEventListener('click', (event) => {
     if (cart && cart.length > 0) {
-      copyToClipboard(cart.map(item => item['菜名']).join('\n')).then(() => toast('已复制')).catch(err => toast(err.message));;
+      copyToClipboard(cart.map((item, index) => (index + 1).toString() + '. ' + item['菜名']).join('\n'))
+        .then(() => toast('已复制')).catch(err => toast(err.message));;
     } else {
       toast('购物车为空');
     }
@@ -2271,13 +2272,6 @@
       cartPanel.style.display = 'none';
       clearCartBtn.style.display = 'none';
     }
-  });
-  document.querySelectorAll('.add-button').forEach(button => {
-    button.addEventListener('click', (event) => {
-      event.stopPropagation();
-      const dishData = JSON.parse(button.getAttribute('data-dish'));
-      addToCart(dishData);
-    });
   });
 
 </script>
