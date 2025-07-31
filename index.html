@@ -109,6 +109,7 @@
       align-items: center;
     }
     .filter-label {
+      width: 85px;
       font-weight: bold;
       font-size: 1.1em;
       color: #333;
@@ -269,12 +270,12 @@
       }
 
       .filters {
-        flex-direction: column;
+        gap: 5px;
+        padding: 5px;
       }
 
-      .header {
-        flex-direction: column;
-        gap: 20px;
+      .filter-group {
+        gap: 0px;
       }
 
       .dish-card {
@@ -283,7 +284,9 @@
       }
 
       .logo {
+        font-size: 2.0rem;
         padding-left: 0;
+        margin: 0;
       }
       .container {
         width: 100%;
@@ -308,7 +311,6 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.3);
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
-
     .price-tag {
       position: absolute;
       top: 4px;
@@ -321,7 +323,6 @@
       font-weight: bold;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
-
     #choose-random-food {
       border-radius: 100%;
       height: 100px;
@@ -333,27 +334,22 @@
       font-size: 1.2em;
       font-weight: bold;
     }
-
     #choose-random-food:active {
       transform: scale(0.90);
     }
-
     .random-food-area {
       display: flex;
       justify-content: center;
       margin-bottom: 20px;
     }
-
     .theme-dark .dropdown,
     .theme-dark .search-input, .theme-dark .link-dropdown {
       background: rgba(0, 0, 0, 0.3);
       color: #ecf0f1;
     }
-
     .theme-dark .search-input::placeholder {
       color: rgba(236, 240, 241, 0.7);
     }
-
     .float-nav {
       position: fixed;
       top: 50%;
@@ -363,7 +359,6 @@
       flex-direction: column;
       z-index: 100;
     }
-
     .float-nav a {
       color: white;
       text-decoration: none;
@@ -375,7 +370,7 @@
       text-align: right;
       font-size: 14px;
       color: #495060;
-      padding: 2px 12px 2px 0;
+      padding: 2px 10px 2px 0;
     }
     label:empty {
       width: 0;
