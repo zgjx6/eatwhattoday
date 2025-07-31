@@ -345,20 +345,6 @@
     .theme-dark .search-input::placeholder {
       color: rgba(236, 240, 241, 0.7);
     }
-    .float-nav {
-      position: fixed;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      z-index: 100;
-    }
-    .float-nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 0.5em;
-    }
     label {
       width: 100px;
       display: inline-block;
@@ -432,8 +418,8 @@
       z-index: 1000;
     }
     .cart-icon-btn {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       background-color: #ff9800;
       color: white;
       border: none;
@@ -541,6 +527,104 @@
       z-index: 9999;
       animation: fade 3s forwards;
     }
+    #menuToggle {
+      position: fixed;
+      bottom: 75px;
+      right: 10px;
+      z-index: 1000;
+      font-size: 20px;
+      background: #f38181;
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      transition: all 0.2s ease;
+    }
+    #navMenu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 200px;
+      background: white;
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.08);
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    #navMenu.open {
+      transform: translateX(0);
+    }
+    .menu-header {
+      padding: 0.8rem 1.5rem;
+      background: #f1f5f9;
+      border-bottom: 1px solid #e2e8f0;
+      font-weight: 600;
+      color: #334155;
+    }
+    .nav-item {
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #334155;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .nav-item:hover {
+      background: #f1f5f9;
+      color: #2563eb;
+    }
+    .nav-item.active {
+      background: #eff6ff;
+      color: #2563eb;
+      font-weight: 500;
+      border-left: 3px solid #3b82f6;
+    }
+    .submenu {
+      background: #f8fafc;
+      border-left: 3px solid #e2e8f0;
+      display: none;
+    }
+    .submenu.open {
+      display: block;
+    }
+    .submenu .nav-item {
+      padding-left: 2.2rem;
+      font-size: 0.95rem;
+      color: #475569;
+    }
+    .arrow {
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+    .arrow.rotate {
+      transform: rotate(180deg);
+    }
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    #overlay.show {
+      display: block;
+      opacity: 1;
+    }
     @keyframes fade {
       0%   { opacity: 1; }
       80%  { opacity: 1; }
@@ -627,7 +711,6 @@
   </div>
   <div class="random-food-area" id="random-food"></div>
   <main id="menuContent"></main>
-  <div class="float-nav" id="floatNav"></div>
   <div class="cart-container">
     <button class="cart-icon-btn" id="cartIconBtn">
       🛒
@@ -648,7 +731,12 @@
       </div>
     </div>
   </div>
-
+  <button id="menuToggle">☰</button>
+  <div id="navMenu">
+    <div class="menu-header">导航菜单</div>
+    <div id="floatMenuContent"></div>
+  </div>
+  <div id="overlay"></div>
 </div>
 
 <script>
@@ -2042,6 +2130,7 @@
       this.setupFilters();
       this.setupEventListeners();
       this.renderMenu();
+      this.generateMenu();
     }
 
     setupThemeSelector() {
@@ -2311,33 +2400,58 @@
       const linkKeys = Object.keys(links);
       return `<a href="${links[linkKeys[0]]}" target="_blank">${dish.菜名}</a>`;
     }
-  }
 
-  function createFloatNav() {
-    const floatNav = document.getElementById('floatNav');
-    Object.keys(menuData).forEach((categoryName, index) => {
-      const link = document.createElement('a');
-      link.href = `#category-${categoryName}`;
-      link.text = categoryName;
-      floatNav.appendChild(link);
-    });
-  }
-
-  function createSecondFloatNav() {
-    const floatNav = document.getElementById('floatNav');
-    Object.keys(menuData).forEach((categoryName) => {
-      const category = menuData[categoryName];
-      Object.keys(category).forEach((subCategoryName) => {
-        const link = document.createElement('a');
-        link.href = `#category-${categoryName}-${subCategoryName}`;
-        link.text = `${categoryName} - ${subCategoryName}`;
-        floatNav.appendChild(link);
-        floatNav.appendChild(document.createTextNode(' '));
+    generateMenu() {
+      Object.keys(this.data).forEach(firstKey => {
+        const firstItem = document.createElement('div');
+        const firstLink = document.createElement('div');
+        firstLink.className = 'nav-item';
+        firstLink.innerHTML = `${firstKey} <span class="arrow">▼</span>`;
+        firstLink.addEventListener('click', (e) => {
+          e.stopPropagation();
+          document.getElementById(`category-${firstKey}`).scrollIntoView();
+          this.updateActive(firstLink);
+          const submenu = firstLink.nextElementSibling;
+          const isOpen = submenu.classList.contains('open');
+          document.querySelectorAll('.submenu.open').forEach(m => {
+            if (m !== submenu) m.classList.remove('open');
+            m.previousElementSibling.querySelector('.arrow').classList.remove('rotate');
+          });
+          submenu.classList.toggle('open', !isOpen);
+          firstLink.querySelector('.arrow').classList.toggle('rotate', !isOpen);
+        });
+        const submenu = document.createElement('div');
+        submenu.className = 'submenu';
+        Object.keys(this.data[firstKey]).forEach(secondKey => {
+          const a = document.createElement('a');
+          a.className = 'nav-item';
+          a.href = `#category-${firstKey}-${secondKey}`;
+          a.textContent = `${firstKey}-${secondKey.toUpperCase()}`;
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById(`category-${firstKey}-${secondKey}`).scrollIntoView();
+            this.updateActive(a);
+            if (window.innerWidth < 768) toggleMenu(false);
+          });
+          submenu.appendChild(a);
+        });
+        firstItem.appendChild(firstLink);
+        firstItem.appendChild(submenu);
+        document.getElementById('floatMenuContent').appendChild(firstItem);
       });
-    });
+    }
+    updateActive(el) {
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+      el.classList.add('active');
+    }
+    toggleMenu(open) {
+      const isOpen = navMenu.classList.contains('open');
+      const shouldOpen = open !== undefined ? open : !isOpen;
+      navMenu.classList.toggle('open', shouldOpen);
+      overlay.classList.toggle('show', shouldOpen);
+    }
   }
 
-  // 购物车数据结构
   let cart = [];
   const CART_STORAGE_KEY = 'dish_cart';
   const dishContainer = document.getElementById('dishContainer');
@@ -2348,6 +2462,9 @@
   const cartItems = document.getElementById('cartItems');
   const cartSummary = document.getElementById('cartSummary');
   const cartCount = document.getElementById('cartCount');
+  const navMenu = document.getElementById('navMenu');
+  const menuToggle = document.getElementById('menuToggle');
+  const overlay = document.getElementById('overlay');
   function loadCartFromStorage() {
     const storedCart = localStorage.getItem(CART_STORAGE_KEY);
     if (storedCart) {
@@ -2464,8 +2581,9 @@
     setTimeout(() => el.remove(), 5000);
   }
   const app = new MenuApp();
-  createFloatNav();
   loadCartFromStorage();
+  menuToggle.addEventListener('click', () => app.toggleMenu());
+  overlay.addEventListener('click', () => app.toggleMenu(false));
   cartIconBtn.addEventListener('click', () => {
     if (cartPanel.style.display === 'block') {
       cartPanel.style.display = 'none';
@@ -2496,7 +2614,21 @@
       clearCartBtn.style.display = 'none';
     }
   });
-
+  window.addEventListener('scroll', () => {
+    const pos = window.scrollY + 100;
+    let activeId = null;
+    document.querySelectorAll('[id^="category-"]').forEach(sec => {
+      if (pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight) activeId = sec.id;
+    });
+    if (activeId) {
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === `#${activeId}` || (activeId.startsWith(`category-${item.textContent.trim().toLowerCase()}`) && !item.href)) {
+          item.classList.add('active');
+        }
+      });
+    }
+  });
 </script>
 </body>
 </html>
