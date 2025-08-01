@@ -2408,7 +2408,7 @@
                                 ${(dish.味道 || []).map(t => `<span class="tag tag-taste">${t}</span>`).join('')}
                             </div>
                         </div>
-                        <button class="add-button" onclick="addToCart('${dish.菜名}', '${dish.价格}')">+</button>`;
+                        <button class="add-button" data-dish-name="${dish.菜名}" onclick="addToCart('${dish.菜名}', '${dish.价格}')">+</button>`;
       } else {
         card.innerHTML = `<div class="dish-info-noimg">
                             <div class="dish-name">
@@ -2422,7 +2422,7 @@
                             ${(dish.特色 || []).map(s => `<span class="tag tag-seasoning">${s}</span>`).join('')}
                             ${(dish.味道 || []).map(t => `<span class="tag tag-taste">${t}</span>`).join('')}
                         </div>
-                        <button class="add-button" onclick="addToCart('${dish.菜名}', '${dish.价格}')">+</button>`;
+                        <button class="add-button" data-dish-name="${dish.菜名}" onclick="addToCart('${dish.菜名}', '${dish.价格}')">+</button>`;
       }
 
       return card;
@@ -2451,7 +2451,6 @@
 
   let cart = [];
   const CART_STORAGE_KEY = 'dish_cart';
-  const dishContainer = document.getElementById('dishContainer');
   const cartIconBtn = document.getElementById('cartIconBtn');
   const clearCartBtn = document.getElementById('clearCartBtn');
   const copyCartBtn = document.getElementById('copyCartBtn');
@@ -2500,8 +2499,12 @@
       cartSummary.innerHTML = `<span>总计: ${totalItems} 项</span><span>¥${totalPrice.toFixed(2)}</span>`;
     }
     const count = cart.length;
-    cartCount.textContent = count;
+    cartCount.textContent = count.toString();
     cartCount.style.display = count > 0 ? 'flex' : 'none';
+    const dishNameSet = new Set(cart.map(dish => dish.菜名));
+    document.querySelectorAll('button[data-dish-name]').forEach(button => {
+      button.style.display = dishNameSet.has(button.getAttribute('data-dish-name')) ? "none" : "block";
+    });
   }
   function addToCart(dish_name, dish_price) {
     for (let i of cart) {
