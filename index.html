@@ -437,7 +437,8 @@
     }
     .cart-panel {
       position: absolute;
-      bottom: 70px;
+      bottom: 55px;
+      z-index: 200;
       right: 0;
       width: 300px;
       background-color: white;
@@ -531,7 +532,7 @@
       position: fixed;
       bottom: 75px;
       right: 10px;
-      z-index: 1000;
+      z-index: 100;
       font-size: 20px;
       background: #f38181;
       color: white;
@@ -1060,7 +1061,6 @@
         {"菜名": "炒方便面", "菜系": "家常菜", "用时": "10m", "价格": "8", "特色": [], "味道": ["香辣"], "链接": {"炒方便面": "https://www.xiachufang.com/recipe/104420346/"}, "图片": `${img_host}3d81d8394e8a4bc3a6415c9e6abae24e_900w_1200h.jpg${img_param}`},
         {"菜名": "意大利面", "菜系": "意大利菜", "用时": "25m", "价格": "30", "特色": ["意面", "番茄酱", "芝士"], "味道": ["酸甜", "奶香"], "链接": {"意大利面": "https://www.xiachufang.com/recipe/106088363/"}, "图片": `${img_host}79248f62b8534b5f967a45465c48f2f5_1080w_1080h.jpg${img_param}`},
         {"菜名": "面疙瘩", "菜系": "家常菜", "用时": "25m", "价格": "10", "特色": ["面疙瘩"], "味道": ["清淡", "鲜香"], "链接": {"面疙瘩": "https://www.xiachufang.com/recipe/106401819/"}, "图片": `${img_host}150fb1d4724643ebac29e7eccbe5ed08_756w_1008h.jpg${img_param}`},
-        {"菜名": "饸饹面", "菜系": "晋菜", "用时": "30m", "价格": "15", "特色": ["饸饹面", "羊汤"], "味道": ["咸香", "微辣"], "链接": {"饸饹面": "https://www.xiachufang.com/recipe/101820474/"}, "图片": `${img_host}4079337c8b0f11e6b87c0242ac110003_600w_400h.jpg${img_param}`},
         {"菜名": "丁丁炒面", "菜系": "新疆菜", "用时": "30m", "价格": "18", "特色": ["羊肉"], "味道": ["咸香", "微酸"], "链接": {"丁丁炒面": "https://www.xiachufang.com/recipe/104467080/"}, "图片": `${img_host}bcb8bdde4fdc4d4bbcdad0b1c8ca0f25_1440w_1080h.jpg${img_param}`},
         {"菜名": "炒疙瘩", "菜系": "北京菜", "用时": "25m", "价格": "8", "特色": [], "味道": ["咸香", "爽脆"], "链接": {"炒疙瘩": "https://www.xiachufang.com/recipe/100428943/"}, "图片": `${img_host}5a7774e688c611e6b87c0242ac110003_650w_650h.jpg${img_param}`},
         {"菜名": "羊肉面片", "菜系": "西北菜", "用时": "30m", "价格": "20", "特色": [], "味道": ["鲜香"], "链接": {"羊肉面片": "https://www.xiachufang.com/recipe/103746926/"}, "图片": `${img_host}de1cd8297a564acda3fedb8dc781bd0e_2000w_2668h.jpg${img_param}`},
@@ -1149,7 +1149,6 @@
         {"菜名": "江西米粉", "菜系": "赣菜", "用时": "20m", "价格": "8", "特色": ["肉末", "酸豆角"], "味道": ["鲜香", "酸辣"], "链接": {"江西米粉": "https://www.xiachufang.com/recipe/106630009/"}, "图片": `${img_host}63c10c3b56674c8f937781e1a504d163_960w_1280h.jpg${img_param}`},
         {"菜名": "湖南米粉", "菜系": "湘菜", "用时": "25m", "价格": "10", "特色": ["卤水", "肉末"], "味道": ["咸香", "微辣"], "链接": {"湖南米粉": "https://www.xiachufang.com/recipe/106257200/"}, "图片": `${img_host}ea4a93334df64bb396abab93734aadb6_1000w_750h.jpg${img_param}`},
         {"菜名": "海南粉", "菜系": "海南菜", "用时": "25m", "价格": "10", "特色": ["腌粉", "牛肉干"], "味道": ["咸香", "微辣"], "链接": {"海南粉": "https://www.xiachufang.com/recipe/102154023/"}, "图片": `${img_host}c929f618b2c211e6947d0242ac110002_1280w_721h.jpg${img_param}`},
-        {"菜名": "抱罗粉", "菜系": "海南菜", "用时": "20m", "价格": "12", "特色": ["汤粉", "牛肉丸"], "味道": ["鲜香", "咸香"], "链接": {"抱罗粉": "https://www.xiachufang.com/recipe/102154690/"}, "图片": `${img_host}4aba8cd1654f4813aa3869716d75f543_590w_443h.jpg${img_param}`},
         {"菜名": "陵水酸粉", "菜系": "海南菜", "用时": "25m", "价格": "15", "特色": [], "味道": ["酸辣"], "链接": {"陵水酸粉": "https://www.xiachufang.com/recipe/100625542/"}, "图片": `${img_host}a33f966a8a0411e6a9a10242ac110002_684w_442h.jpg${img_param}`},
       ],
       "包子": [
@@ -2130,7 +2129,6 @@
       this.setupFilters();
       this.setupEventListeners();
       this.renderMenu();
-      this.generateMenu();
     }
 
     setupThemeSelector() {
@@ -2296,6 +2294,7 @@
       container.innerHTML = '';
       this.allFilteredDishes = [];
       document.getElementById('random-food').innerHTML = '';
+      document.getElementById('floatMenuContent').innerHTML = '';
       Object.entries(this.data).forEach(([categoryName, subcategories]) => {
         if (this.filters.foodType === '' || this.filters.foodType === categoryName) {
           let hasVisibleDishes = false;
@@ -2303,12 +2302,35 @@
           const categoryTitle = document.createElement('h1');
           categoryTitle.className = 'category-title';
           categoryTitle.textContent = `${categoryName}(${Object.values(subcategories).reduce((sum, v) => sum + v.length, 0)})`;
+          let categoryCount = 0;
           let categoryId = 'category-' + categoryName;
           categoryTitle.id = categoryId
           categoryElement.appendChild(categoryTitle);
+
+          const firstItem = document.createElement('div');
+          const firstLink = document.createElement('div');
+          firstLink.className = 'nav-item';
+          firstLink.innerHTML = `${categoryName} <span class="arrow">▼</span>`;
+          firstLink.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById(`category-${categoryName}`).scrollIntoView();
+            this.updateActive(firstLink);
+            const submenu = firstLink.nextElementSibling;
+            const isOpen = submenu.classList.contains('open');
+            document.querySelectorAll('.submenu.open').forEach(m => {
+              if (m !== submenu) m.classList.remove('open');
+              m.previousElementSibling.querySelector('.arrow').classList.remove('rotate');
+            });
+            submenu.classList.toggle('open', !isOpen);
+            firstLink.querySelector('.arrow').classList.toggle('rotate', !isOpen);
+          });
+          const submenu = document.createElement('div');
+          submenu.className = 'submenu';
+
           Object.entries(subcategories).forEach(([subcategoryName, dishes]) => {
             const filteredDishes = dishes.filter(dish => this.filterDish(dish));
             if (filteredDishes.length > 0) {
+              categoryCount += filteredDishes.length;
               hasVisibleDishes = true;
               const subcategoryTitle = document.createElement('h2');
               subcategoryTitle.className = 'subcategory-title';
@@ -2329,11 +2351,25 @@
                 dishesGrid.appendChild(dishCard);
               });
               categoryElement.appendChild(dishesGrid);
+              const a = document.createElement('a');
+              a.className = 'nav-item';
+              a.href = `#category-${categoryName}-${subcategoryName}`;
+              a.textContent = `${categoryName}-${subcategoryName.toUpperCase()}`;
+              a.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById(`category-${categoryName}-${subcategoryName}`).scrollIntoView();
+                this.updateActive(a);
+              });
+              submenu.appendChild(a);
             }
             this.allFilteredDishes.push(...filteredDishes)
           });
           if (hasVisibleDishes) {
+            categoryTitle.textContent = `${categoryName}(${categoryCount})`;
             container.appendChild(categoryElement);
+            firstItem.appendChild(firstLink);
+            firstItem.appendChild(submenu);
+            document.getElementById('floatMenuContent').appendChild(firstItem);
           }
         }
       });
@@ -2401,45 +2437,6 @@
       return `<a href="${links[linkKeys[0]]}" target="_blank">${dish.菜名}</a>`;
     }
 
-    generateMenu() {
-      Object.keys(this.data).forEach(firstKey => {
-        const firstItem = document.createElement('div');
-        const firstLink = document.createElement('div');
-        firstLink.className = 'nav-item';
-        firstLink.innerHTML = `${firstKey} <span class="arrow">▼</span>`;
-        firstLink.addEventListener('click', (e) => {
-          e.stopPropagation();
-          document.getElementById(`category-${firstKey}`).scrollIntoView();
-          this.updateActive(firstLink);
-          const submenu = firstLink.nextElementSibling;
-          const isOpen = submenu.classList.contains('open');
-          document.querySelectorAll('.submenu.open').forEach(m => {
-            if (m !== submenu) m.classList.remove('open');
-            m.previousElementSibling.querySelector('.arrow').classList.remove('rotate');
-          });
-          submenu.classList.toggle('open', !isOpen);
-          firstLink.querySelector('.arrow').classList.toggle('rotate', !isOpen);
-        });
-        const submenu = document.createElement('div');
-        submenu.className = 'submenu';
-        Object.keys(this.data[firstKey]).forEach(secondKey => {
-          const a = document.createElement('a');
-          a.className = 'nav-item';
-          a.href = `#category-${firstKey}-${secondKey}`;
-          a.textContent = `${firstKey}-${secondKey.toUpperCase()}`;
-          a.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.getElementById(`category-${firstKey}-${secondKey}`).scrollIntoView();
-            this.updateActive(a);
-            if (window.innerWidth < 768) toggleMenu(false);
-          });
-          submenu.appendChild(a);
-        });
-        firstItem.appendChild(firstLink);
-        firstItem.appendChild(submenu);
-        document.getElementById('floatMenuContent').appendChild(firstItem);
-      });
-    }
     updateActive(el) {
       document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
       el.classList.add('active');
