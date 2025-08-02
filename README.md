@@ -6,9 +6,9 @@
 
 ## 在线访问
 
-netlify: https://eatwhattoday.netlify.app/
+netlify: https://eatwhattoday.netlify.app/index.html?imgProxy=/imgs/
 
-cloudflare: https://eatwhattoday.zgjx6.workers.dev/index.html
+cloudflare: https://eatwhattoday.zgjx6.workers.dev/index.html?imgProxy=/imgs/
 
 ## 部署
 
