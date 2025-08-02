@@ -6,7 +6,7 @@
 
 ## 在线访问
 
-cloudflare: https://eatwhattoday.zgjx6.workers.dev/
+cloudflare: https://eatwhattoday.zgjx6.workers.dev/index.html?imgProxy=/proxy-image/
 
 ## 部署
 
@@ -16,13 +16,7 @@ cloudflare: https://eatwhattoday.zgjx6.workers.dev/
 
 ### nginx 部署
 
-由于下厨房的图片限制referer，所以不能直接返回index.html，需要对图片进行反向代理
-
-首先需要替换图片域名，可以手动也可以用以下命令
-
-```shell
-sed -i 's|https://i2.chuimg.com|/proxy-image|g' /opt/app/off/download/eatwhattoday/index.html
-```
+由于下厨房的图片限制referer，所以需要对图片进行反向代理
 
 修改nginx.conf中server部分，添加如下代理：
 
@@ -43,15 +37,14 @@ sed -i 's|https://i2.chuimg.com|/proxy-image|g' /opt/app/off/download/eatwhattod
     }
 ```
 
+然后访问 http://localhost/index.html?imgProxy=/proxy-image/
+
 ### cloudflare 部署
 
 部署命令:
 
 ```shell
-pwd
-ls -al
-cp index.html cloudflare/public/index.html
 cd cloudflare
-sed -i 's|https://i2.chuimg.com|/proxy-image|g' public/index.html
+cp ../index.html public/index.html
 npx wrangler deploy
 ```
