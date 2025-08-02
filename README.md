@@ -6,7 +6,9 @@
 
 ## 在线访问
 
-cloudflare: https://eatwhattoday.zgjx6.workers.dev/index.html?imgProxy=/proxy-image/
+netlify: https://eatwhattoday.netlify.app/
+
+cloudflare: https://eatwhattoday.zgjx6.workers.dev/index.html
 
 ## 部署
 
@@ -16,10 +18,6 @@ cloudflare: https://eatwhattoday.zgjx6.workers.dev/index.html?imgProxy=/proxy-im
 
 ### nginx 部署
 
-由于下厨房的图片限制referer，所以需要对图片进行反向代理
-
-修改nginx.conf中server部分，添加如下代理：
-
 ```
     location / {
             # 项目路径
@@ -28,16 +26,9 @@ cloudflare: https://eatwhattoday.zgjx6.workers.dev/index.html?imgProxy=/proxy-im
             autoindex_exact_size off;
             autoindex_localtime on;
         }
-    location /proxy-image/ {
-        proxy_pass https://i2.chuimg.com/;
-        proxy_set_header Referer "https://i2.chuimg.com/";
-        proxy_set_header Host i2.chuimg.com;
-        proxy_ssl_server_name on;
-        proxy_buffering on;
-    }
 ```
 
-然后访问 http://localhost/index.html?imgProxy=/proxy-image/
+然后访问 http://localhost/index.html
 
 ### cloudflare 部署
 
