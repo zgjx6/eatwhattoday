@@ -35,7 +35,6 @@ downloaded, errored = 0, 0
 for filename in set(matches):  # 去重
   filepath = os.path.join(imgs_dir, filename)
   if os.path.exists(filepath):
-    print(f"跳过已存在的文件: {filename}")
     continue
 
   img_url = img_host + filename + img_param
