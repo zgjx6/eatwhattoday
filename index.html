@@ -16,31 +16,13 @@
       font-family: 'Arial', sans-serif;
       line-height: 1.6;
       transition: all 0.3s ease;
+      background: #E9E9E9;
+      color: #333;
     }
     .container {
       width: 90%;
       margin: 0 auto;
       padding: 20px;
-    }
-    .theme-modern {
-      background: linear-gradient(135deg, #667eea 0%, #667eea 100%);
-      color: #333;
-    }
-    .theme-classic {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      color: #333;
-    }
-    .theme-dark {
-      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-      color: #ecf0f1;
-    }
-    .theme-elegant {
-      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-      color: #5d4037;
-    }
-    .theme-nature {
-      background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
-      color: #2e7d32;
     }
     .header {
       display: flex;
@@ -48,10 +30,10 @@
       align-items: center;
       margin-bottom: 30px;
       padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.95) 100%);
       backdrop-filter: blur(10px);
       border-radius: 15px;
-      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      box-shadow: 0 4px 16px rgba(31, 38, 135, 0.2);
     }
     .logo {
       margin: 0 auto;
@@ -68,8 +50,6 @@
       color: #333;
     }
     select {
-      outline: none;
-      border: none;
       cursor: pointer;
     }
     .link-dropdown {
@@ -82,22 +62,18 @@
       min-height: 24px;
     }
     .dropdown {
-      padding: 10px 15px;
-      border: none;
+      padding: 3px 10px;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.2);
-      color: inherit;
-      cursor: pointer;
       font-size: 14px;
       backdrop-filter: blur(5px);
     }
     .filters {
       display: flex;
       flex-wrap: wrap;
+      justify-content: flex-start;
       gap: 20px;
       margin-bottom: 30px;
       padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
       border-radius: 15px;
       box-shadow: 0 4px 16px rgba(31, 38, 135, 0.2);
@@ -116,19 +92,14 @@
     }
     input {
       outline: none;
+      border: 1px solid #333;
     }
     .search-input {
-      padding: 10px 15px;
-      border: none;
+      padding: 4px 15px;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.2);
-      color: inherit;
       font-size: 14px;
       min-width: 200px;
       backdrop-filter: blur(5px);
-    }
-    .search-input::placeholder {
-      color: rgba(255, 255, 255, 0.7);
     }
     .checkbox-group {
       display: flex;
@@ -169,7 +140,7 @@
     }
     .dish-card:hover {
       transform: scale(1.02);
-      box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+      box-shadow: 0 6px 10px rgba(31, 38, 135, 0.5);
     }
     .dish-card.no-image {
       flex-direction: column;
@@ -285,17 +256,25 @@
         margin: 0;
       }
       .container {
-        width: 100%;
         padding: 0 8px 20px 8px;
       }
     }
-    @media (max-width: 400px) {
+    @media (max-width: 420px) {
       .filter-label {
         width: 80px;
         font-size: 1.0em;
       }
       .logo {
         font-size: 1.2rem;
+      }
+      .header {
+        margin-bottom: 10px;
+        padding: 5px 10px;
+        border-radius: 0;
+        width: 100%;
+      }
+      .dish-card:hover {
+        transform: unset;
       }
     }
     .category-title {
@@ -666,56 +645,69 @@
         transition: scrollbar-color 0.3s ease;
       }
     }
+    .bg {
+      background: #E9E9E9 url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wEEEAAQABAAEAAQABEAEAASABQAFAASABkAGwAYABsAGQAlACIAHwAfACIAJQA4ACgAKwAoACsAKAA4AFUANQA+ADUANQA+ADUAVQBLAFsASgBFAEoAWwBLAIcAagBeAF4AagCHAJwAgwB8AIMAnAC9AKkAqQC9AO4A4gDuATcBNwGiEQAQABAAEAAQABEAEAASABQAFAASABkAGwAYABsAGQAlACIAHwAfACIAJQA4ACgAKwAoACsAKAA4AFUANQA+ADUANQA+ADUAVQBLAFsASgBFAEoAWwBLAIcAagBeAF4AagCHAJwAgwB8AIMAnAC9AKkAqQC9AO4A4gDuATcBNwGi/8IAEQgA+gD6AwEiAAIRAQMRAf/EABgAAQEBAQEAAAAAAAAAAAAAAAABAgMG/9oACAEBAAAAAPZlAAhQzNgiaAASgAEjQAAAAGWgAAAAJNAAAAASaAAAAAAAAAAAAM6AxWgQUAMbBJGqAlAEUGVlqFJQBFBms7ioKAEUEJoJQAGdATN1KigAM6lACKAM2jOpQAABLnQigAABFAAAAAABKAAAACTQAAAAEUAAAAEKAipKKAGZqghZYolAExdghZc6CUATLVCCs6lSgAhQiiBNAAigAAAAAAAAAAAAAAAktAAAYrQMxqgAAkGhM1aAABzdJQwug//EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oACAEDEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8QAJRAAAgIABgEFAQEAAAAAAAAAAAERMRAgITBBUUACQlBhcWCx/9oACAEBAAE/ALIE97lYcrNrEQacCWamyUfe/DEt6CD9RMfARFFVXwEco/BPz2j/AH5WV475FWdvB6Cc5pII3eF9vOxRireZYutt0c5+WIgSk9OMfbNUPVZH1tvgXOZ0yHg8FRJr3jyUSiehLb5FWZ6onRC/SxWOsvO/w9hrBSJQOsZXZM0JRvW8FW5RK25lieVYLx7sakUvLBD8dqRMvz2p22J+f6iOfgFUC89dkIVbMI1WL6WEPs1NeiX0J7dIliv9zz0R9k4c4KmxVlW27w4/MzFRqRgrHR7VmVbbofYhZlRqSjV4+3K+t1dEnOaOUT9ZY6FKJfRJKHuu5IYl4ML+PZLqyV4jcDRp0KUJzmtilN8i/NRV4bofDO9TXoV5WOJ0Kehbci8R2K1hys3tPTZy83//xAAUEQEAAAAAAAAAAAAAAAAAAACA/9oACAECAQE/AAB//8QAFBEBAAAAAAAAAAAAAAAAAAAAgP/aAAgBAwEBPwAAf//Z) 50% 0;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      -webkit-animation: flow 16s linear infinite;
+      animation: flow 16s linear infinite;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1
+    }
+    @keyframes flow {
+      0% {
+        background-position: 50% 0
+      }
+      100% {
+        background-position: 50% -250px
+      }
+    }
   </style>
 </head>
-<body class="theme-modern">
-<div class="container">
-  <header class="header">
-    <div class="logo">今天吃什么</div>
-    <div class="theme-selector">
-      <span style="margin-right: 5px;font-size: 0.9em;">无图模式</span>
-      <input type="checkbox" name="noImg" id="noImg"/><label class="switch" for="noImg"><span class="ball"></span></label>
-    </div>
-    <div class="theme-selector">
-      <select class="dropdown" id="themeSelector">
-        <option value="theme-modern">现代</option>
-        <option value="theme-classic">经典</option>
-        <option value="theme-dark">暗色</option>
-        <option value="theme-elegant">优雅</option>
-        <option value="theme-nature">自然</option>
-      </select>
-    </div>
-  </header>
-
-  <div class="filters">
-    <div class="filter-group">
-      <label class="filter-label">类别</label>
-      <select class="dropdown" id="foodTypeFilter">
-        <option value="">全部</option>
-      </select>
-    </div>
-    <div class="filter-group">
-      <label class="filter-label">菜系</label>
-      <select class="dropdown" id="cuisineFilter">
-        <option value="">全部</option>
-      </select>
-    </div>
-
-    <div class="filter-group" style="display: none">
-      <label class="filter-label">特色</label>
-      <div class="checkbox-group" id="seasoningFilters"></div>
-    </div>
-
-    <div class="filter-group" style="display: none">
-      <label class="filter-label">味道</label>
-      <div class="checkbox-group" id="tasteFilters"></div>
-    </div>
-
-    <div class="filter-group">
-      <label class="filter-label">搜索菜名</label>
-      <input type="search" class="search-input" id="searchInput" placeholder="输入菜名搜索..." autocomplete="on" clear>
-    </div>
+<body>
+<div class="bg"></div>
+<header class="header container">
+  <div class="logo">今天吃什么</div>
+  <div class="theme-selector">
+    <span style="margin-right: 5px;font-size: 0.9em;">无图模式</span>
+    <input type="checkbox" name="noImg" id="noImg"/><label class="switch" for="noImg"><span class="ball"></span></label>
   </div>
+</header>
+
+<div class="filters header container">
+  <div class="filter-group">
+    <label class="filter-label">类别</label>
+    <select class="dropdown" id="foodTypeFilter">
+      <option value="">全部</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label class="filter-label">菜系</label>
+    <select class="dropdown" id="cuisineFilter">
+      <option value="">全部</option>
+    </select>
+  </div>
+
+  <div class="filter-group" style="display: none">
+    <label class="filter-label">特色</label>
+    <div class="checkbox-group" id="seasoningFilters"></div>
+  </div>
+
+  <div class="filter-group" style="display: none">
+    <label class="filter-label">味道</label>
+    <div class="checkbox-group" id="tasteFilters"></div>
+  </div>
+
+  <div class="filter-group">
+    <label class="filter-label">搜索菜名</label>
+    <input type="search" class="search-input" id="searchInput" placeholder="输入菜名搜索..." autocomplete="on" clear>
+  </div>
+</div>
+<div class="container">
   <div class="random-food-area">
     <button id="choose-random-food">点菜</button>
   </div>
@@ -916,7 +908,7 @@
         {"菜名": "清炖牛肋条", "菜系": "家常菜", "用时": "90m", "价格": "60", "特色": [], "味道": ["鲜香"], "链接": {"清炖牛肋条": "https://www.xiachufang.com/recipe/107360965/"}, "图片": `${img_host}08c2e4c554ec47758991dcdf5493c890_1920w_2560h.jpg${img_param}`},
         {"菜名": "麻辣烫", "菜系": "川菜", "用时": "20m", "价格": "15", "特色": ["多种食材"], "味道": ["麻辣"], "链接": {"麻辣烫": "https://www.xiachufang.com/recipe/105856141/"}, "图片": `${img_host}6671be6bc4a940ae80141719d162d6b7_2959w_3022h.jpg${img_param}`},
         {"菜名": "关东煮", "菜系": "日本料理", "用时": "40m", "价格": "20", "特色": ["多种食材"], "味道": ["鲜香", "清淡"], "链接": {"关东煮": "https://www.xiachufang.com/recipe/106964474/"}, "图片": `${img_host}27d9e46bfa974586b38b36e5b8e8ec45_3414w_2560h.jpg${img_param}`},
-        {"菜名": "钵钵鸡", "菜系": "川菜", "用时": "30m", "价格": "25", "特色": ["多种食材"], "味道": ["麻辣"], "链接": {"关东煮": "https://www.xiachufang.com/recipe/106964474/"}, "图片": `${img_host}27d9e46bfa974586b38b36e5b8e8ec45_3414w_2560h.jpg${img_param}`},
+        {"菜名": "钵钵鸡", "菜系": "川菜", "用时": "30m", "价格": "25", "特色": ["多种食材"], "味道": ["麻辣"], "链接": {"钵钵鸡": "https://www.xiachufang.com/recipe/100489585/"}, "图片": `${img_host}e6fa6769d17b4040a6e5df0624316138_1792w_1344h.jpg${img_param}`},
         {"菜名": "串串香", "菜系": "川菜", "用时": "30m", "价格": "25", "特色": ["多种食材"], "味道": ["麻辣"], "链接": {"串串香": "https://www.xiachufang.com/recipe/103769454/"}, "图片": `${img_host}09b8e88900eb410fbdcda084d98a562f_1080w_864h.jpg${img_param}`},
         {"菜名": "冒菜", "菜系": "川菜", "用时": "25m", "价格": "20", "特色": ["多种食材"], "味道": ["麻辣"], "链接": {"冒菜": "https://www.xiachufang.com/recipe/103576726/"}, "图片": `${img_host}de48bbe2183b4b91a16c2bac986c9217_640w_388h.jpg${img_param}`},
         {"菜名": "羊肉焖饼", "菜系": "西北菜", "用时": "45m", "价格": "25", "特色": [], "味道": ["咸香"], "链接": {"羊肉焖饼": "https://www.xiachufang.com/recipe/100623341/"}, "图片": `${img_host}244c743689ff11e6b87c0242ac110003_1420w_855h.jpg${img_param}`},
@@ -972,6 +964,7 @@
         {"菜名": "软兜长鱼", "菜系": "苏菜", "用时": "35m", "价格": "40", "特色": ["鳝鱼", "蒜瓣"], "味道": ["鲜香", "微甜"], "链接": {"软兜长鱼": "https://www.xiachufang.com/recipe/103685254/"}, "图片": `${img_host}de550409437c496e82acb51801e43f0f_1280w_1024h.jpg${img_param}`},
         {"菜名": "拆烩鲢鱼头", "菜系": "苏菜", "用时": "50m", "价格": "35", "特色": ["鲢鱼头", "高汤"], "味道": ["鲜香", "浓郁"], "链接": {"拆烩鲢鱼头": "https://www.xiachufang.com/recipe/102875658/"}, "图片": `${img_host}cf5be0f63d0a418dbc17707f6cb893ac_1080w_864h.jpg${img_param}`},
         {"菜名": "炖生敲", "菜系": "苏菜", "用时": "90m", "价格": "50", "特色": ["鳝鱼", "捶打"], "味道": ["鲜香", "浓郁"], "链接": {"炖生敲": "https://www.xiachufang.com/recipe/103568460/"}, "图片": `${img_host}24d4b24592e04b758c935720ffebaf29_1500w_1124h.jpg${img_param}`},
+        {"菜名": "重庆鸡公煲", "菜系": "川菜", "用时": "40m", "价格": "35", "特色": ["豆瓣酱", "辣椒", "花椒"], "味道": ["麻辣", "鲜香"], "链接": {"重庆鸡公煲": "https://www.xiachufang.com/recipe/104076679/"}, "图片": `${img_host}e062173d36114722b11d8e3386751a85_1080w_1080h.jpg${img_param}`},
       ],
       "煎炸烤": [
         { "菜名": "烧烤-肉类", "菜系": "", "用时": "", "价格": "", "特色": ["烧烤", "聚餐"], "味道": [], "链接": {"羊肉串": "https://www.xiachufang.com/recipe/104438073/", "牛肉串": "", "五花肉串": "", "鸡翅": "", "鸡心": "", "鸡胗": "", "鸡皮": "", "郡肝": "", "鸡腿肉": "", "牛板筋": "", "猪脆骨": "", "羊腰子": "", "牛舌": "", "驴肉串": "", "鸭心": "", "鸭胗": "", "鸭肠": "", "鸭舌": "", "肥肠": "", "腊肠": "", "火腿肠": "", "培根卷金针菇": "", "牛肉粒": "", "鹿肉串": "", "兔肉串": "", "羊腰": "", "鸡肝": "", "鸭肝": "", "猪脑": "", "牛肚": "", "黄喉": "", "牛百叶": "", "鸡冠": "", "鸡肾": "", "鱼泡": "", "金针菇肥牛卷": "", "培根": "", "藕夹肉": "", "韭菜包金针菇": "",  "云南包浆豆腐": "", "延吉烤冷面": "", "长沙口味虾": "", "四川烤脑花": "", "贵州烤豆腐果": "", "东北烤蚕蛹": "",}, "图片": `${img_host}dddaf0a28bf54b2bab327d04dcacdd34_3780w_3022h.jpg${img_param}` },
@@ -1660,7 +1653,7 @@
         {"菜名": "麻辣兔头", "菜系": "川菜", "用时": "60m", "价格": "25", "特色": [], "味道": ["麻辣"], "链接": {"麻辣兔头": "https://www.xiachufang.com/recipe/104125359/"}, "图片": `${img_host}7f6abb1ded6b4ab0ad2e3eee913fa892_1152w_864h.jpg${img_param}`},
         {"菜名": "江津米花糖", "菜系": "川菜", "用时": "60m", "价格": "20", "特色": ["糯米", "糖浆"], "味道": ["香甜", "酥脆"], "链接": {"江津米花糖": "https://www.xiachufang.com/recipe/106997533/"}, "图片": `${img_host}9d15cbba35f5495dab2a95c9076bec6f_1280w_1706h.jpg${img_param}`},
         {"菜名": "磁器口陈麻花", "菜系": "川菜", "用时": "45m", "价格": "12", "特色": ["芝麻", "油炸"], "味道": ["香脆", "咸甜"], "链接": {"陈麻花": "https://www.xiachufang.com/recipe/107088044/"}, "图片": `${img_host}dd1d555c2ccf4ea0bdbb794dc07f3f8e_1920w_2560h.jpg${img_param}`},
-        {"菜名": "江津芝麻杆", "菜系": "川菜", "用时": "", "价格": "15", "特色": ["芝麻"], "味道": ["香甜"], "链接": {"江津芝麻杆": "https://www.xiachufang.com/recipe/105895449/"}, "图片": `${img_host}1accf9d7e2b24c869886430457279e05_3024w_4032h.jpg${img_param}`},
+        {"菜名": "江津芝麻杆", "菜系": "川菜", "用时": "", "价格": "15", "特色": ["芝麻"], "味道": ["香甜"], "链接": {}, "图片": ""},
         {"菜名": "重庆油茶", "菜系": "川菜", "用时": "15m", "价格": "6", "特色": ["芝麻酱", "辣椒油"], "味道": ["咸香", "微辣"], "链接": {"重庆油茶": "https://www.xiachufang.com/recipe/104499810/"}, "图片": `${img_host}4b295f41e8b14e8597f89470e428be33_3024w_4032h.jpg${img_param}`},
         {"菜名": "合川桃片", "菜系": "川菜", "用时": "", "价格": "10", "特色": ["糯米", "桃仁"], "味道": ["香甜"], "链接": {"合川桃片": "https://www.xiachufang.com/recipe/106954005/"}, "图片": `${img_host}0068624a60b74b65a24f991a9089a0d5_1280w_1706h.jpg${img_param}`},
         {"菜名": "山城小汤圆", "菜系": "川菜", "用时": "30m", "价格": "10", "特色": ["黑芝麻", "糯米"], "味道": ["香甜", "软糯"], "链接": {"山城小汤圆": "https://www.xiachufang.com/recipe/100448861/"}, "图片": `${img_host}061ca5be88db11e6a9a10242ac110002_640w_640h.jpg${img_param}`},
@@ -2171,23 +2164,9 @@
     }
 
     init() {
-      this.setupThemeSelector();
       this.setupFilters();
       this.setupEventListeners();
       this.renderMenu();
-    }
-
-    setupThemeSelector() {
-      const themeClass = localStorage.getItem("themeClass");
-      const themeSelector = document.getElementById('themeSelector');
-      if (themeClass) {
-        document.body.className = themeClass;
-        themeSelector.value = themeClass;
-      }
-      themeSelector.addEventListener('change', (e) => {
-        document.body.className = e.target.value;
-        localStorage.setItem("themeClass", e.target.value);
-      });
     }
 
     setupFilters() {
@@ -2356,7 +2335,7 @@
           const firstItem = document.createElement('div');
           const firstLink = document.createElement('div');
           firstLink.className = 'nav-item';
-          firstLink.innerHTML = `${categoryName} <span class="arrow">▼</span>`;
+          firstLink.innerHTML = `${categoryName}(${Object.values(subcategories).reduce((sum, v) => sum + v.length, 0)}) <span class="arrow">▼</span>`;
           firstLink.addEventListener('click', (e) => {
             e.stopPropagation();
             document.getElementById(`category-${categoryName}`).scrollIntoView();
@@ -2400,7 +2379,7 @@
               const a = document.createElement('a');
               a.className = 'nav-item';
               a.href = `#category-${categoryName}-${subcategoryName}`;
-              a.textContent = `${categoryName}-${subcategoryName.toUpperCase()}`;
+              a.textContent = `${categoryName}-${subcategoryName}(${filteredDishes.length})`;
               a.addEventListener('click', (e) => {
                 e.preventDefault();
                 document.getElementById(`category-${categoryName}-${subcategoryName}`).scrollIntoView();
