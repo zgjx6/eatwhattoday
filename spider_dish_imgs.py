@@ -59,5 +59,5 @@ for root, dirs, filenames in os.walk(imgs_dir):
       os.remove(os.path.join(root, filename))
       deleted += 1
       print(f"❌ 文件已删除 {filename}")
-
+os.system('git add imgs')
 print(f"\n完成！成功下载 {downloaded} 张图片，失败 {errored} 张图片，删除 {deleted} 张图片")
