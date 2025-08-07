@@ -759,7 +759,7 @@
 
 <script>
   const params = new URLSearchParams(window.location.search);
-  let img_host = params.get('imgProxy') || (document.location.host ? "https://i2.chuimg.com/" : "imgs/");
+  let img_host = params.get('imgProxy') || (document.location.host ? "imgs/" : "https://i2.chuimg.com/");
   img_host = img_host.endsWith('/') ? img_host : img_host + '/';
   const img_param = "?imageView2/1/w/150/h/150/interlace/1/q/75"
   const menuData = {
